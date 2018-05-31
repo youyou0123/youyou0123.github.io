@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>悠游小屋</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="迷宫一样的this指向问题 标签（空格分隔）： js  　　this是个让人又爱又恨的存在。　　爱它的方便简洁，恨它的复杂多变。　　我发现，在任何领域，都是学的越少，越觉得不过如此；学的越多，越觉得自己无知。　　最早接触this，是在函数内部使用，觉得就是替代一下函数而已，不是什么复杂的东西。结果，越到后来，越觉得自己浅薄而无知。对事物下定义过于轻率。　　　　今天写下这个总结，将已经出现的this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="悠游小屋">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/index.html">
+<meta property="og:site_name" content="悠游小屋">
+<meta property="og:description" content="迷宫一样的this指向问题 标签（空格分隔）： js  　　this是个让人又爱又恨的存在。　　爱它的方便简洁，恨它的复杂多变。　　我发现，在任何领域，都是学的越少，越觉得不过如此；学的越多，越觉得自己无知。　　最早接触this，是在函数内部使用，觉得就是替代一下函数而已，不是什么复杂的东西。结果，越到后来，越觉得自己浅薄而无知。对事物下定义过于轻率。　　　　今天写下这个总结，将已经出现的this">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-31T12:36:00.815Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="悠游小屋">
+<meta name="twitter:description" content="迷宫一样的this指向问题 标签（空格分隔）： js  　　this是个让人又爱又恨的存在。　　爱它的方便简洁，恨它的复杂多变。　　我发现，在任何领域，都是学的越少，越觉得不过如此；学的越多，越觉得自己无知。　　最早接触this，是在函数内部使用，觉得就是替代一下函数而已，不是什么复杂的东西。结果，越到后来，越觉得自己浅薄而无知。对事物下定义过于轻率。　　　　今天写下这个总结，将已经出现的this">
+  
+    <link rel="alternate" href="/atom.xml" title="悠游小屋" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/plugin/bganimation/bg.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <div class="outer">
+        <div class="widget-wrap mobile-header">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://img3.duitang.com/uploads/item/201508/13/20150813083126_Q5TZN.thumb.224_0.jpeg">
+    <h2 class="author">youyou0123</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>6</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+        <section id="main"><article id="post-迷宫一样的this指向问题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/31/迷宫一样的this指向问题/" class="article-date">
+  <time class="post-time" datetime="2018-05-31T12:36:00.471Z" itemprop="datePublished">
+    <span class="post-month">5月</span><br/>
+    <span class="post-day">31</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>迷宫一样的this指向问题</p>
+<p>标签（空格分隔）： js</p>
+<hr>
+<p>　　this是个让人又爱又恨的存在。<br>　　爱它的方便简洁，恨它的复杂多变。<br>　　我发现，在任何领域，都是学的越少，越觉得不过如此；学的越多，越觉得自己无知。<br>　　最早接触this，是在函数内部使用，觉得就是替代一下函数而已，不是什么复杂的东西。结果，越到后来，越觉得自己浅薄而无知。对事物下定义过于轻率。<br>　　<br>　　今天写下这个总结，将已经出现的this情况大致归总一下，与大家共勉。</p>
+<p>　　1.首先我们来说说，this是什么？<br>　　　　this是个关键字，语言规范里规定他指向函数执行时的当前对象。它代表函数运行时，自动生成的一个内部对象，只能在函数内部使用。</p>
+<p>　　2.然后，最主要的是，this指向谁？<br>　　　　this的指向是它最复杂的地方。需要好好说道说道。<br>　　大体上来分，this的出现分为两个地方：<br>　　　　（1）全局作用域，在全局作用域中，this指向window。<br>　　　　（2）函数中，在函数中this指向当前有名函数，没有有名函数的时候，this指向全局对象window。</p>
+<p>　　同样是在函数中，因调用模式不同仍然有不同情况。在JS中调用函数的模式可以分为五种，方法调用模式、函数调用模式、构造函数模式、定时器和匿名函数apply调用模式。这些模式在如何初始化关键参数this上存在差异。<br>　　<br>　　1.方法调用模式:　　谁调用指向谁<br>　　　　函数作为某个对象的成员方法调用时this指向该对象。<br>　　2.函数调用模式:　　指向window<br>　　　　当一个函数并非一个对象的属性时，那么它就是被当做函数来调用的。在此种模式下，this被绑定为全局对象，默认指向了全局对象window。<br>　　3.构造函数模式：　　指向构造函数新建的对象<br>　　　　函数作为构造函数调用时this指向用该构造函数构造出来的新对象。<br>　　4.以及匿名函数：指向window<br>　　　　setTimeout和setInterval定时器运行及匿名函数调用随时，this指向全局对象window。</p>
+<p>　　再然后，重头戏来了！<br>　　如果只有上面那些，都不算大问题，大不了多背几遍，那都不叫事儿。<br>　　问题是还有下面这些！</p>
+<p>　　apply、call、bind。<br>　　<br>　　这三个函数是函数对象的一个方法，他们的作用就是为了改变函数执行时候的this指向，具体用法如下：</p>
+<p>　　call：call(obj[,arg1][,arg2]);第一个参数为强制改变需要指向的对象，后边可选的是该函数的参数，如果不传obj的话默认为window。</p>
+<p>　　apply:apply(obj[,arr]);第一个参数为强制改变需要指向的对象，后边可选的是该参数集合的数组形式，如果不传obj的话默认为window。</p>
+<p>　　apply和call的作用和调用形式基本一致，不同的是call后面的参数与方法中是一一对应的，而apply的第二个参数是一个数组，数组中的元素是和方法中一一对应的，这就是两者最大的区别。两者都可以不传参数，此时默认改变指向的对象为全局对象。</p>
+<p>　　bind:bind的调用形式和call相同，但是他返回的是改变调用对象后的函数引用，所以还要再执行一次，也就是obj.fun().bind()()。</p>
+<p>总结:this作为函数运行时，自动生成的一个内部对象，只能在函数内部使用。具体this指向谁，要看this的所有函数是谁调用的，具体情况可分为全局作用域、作为某对象的方法调用、直接执行、匿名函数直接执行、call、apply、bind强制改变调用对象等。</p>
+<p>　　明天上实例，给大家绕一下，看看有没有入坑的。拜拜喽~~~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjhuj0npv0001kg9joqd0yecp" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/05/29/js中面向过程和面向对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <h1 class="blog-title">悠游小屋</h1>
+    <h2 class="blog-subtitle"></h2>
+    <ul class="blog-link">
+     
+          <a href="/" title="Home">
+            <li>主页</li>
+          </a>
+        
+          <a href="/archives" title="Archives">
+            <li>归档</li>
+          </a>
+        
+          <a href="/categories" title="Categories">
+            <li>分类</li>
+          </a>
+        
+          <a href="/tags" title="Tags">
+            <li>标签</li>
+          </a>
+        
+    </ul>
+  </div>
+</div>
+
+  
+    <div class="widget-wrap">
+  <h3 class="widget-title"></h3>
+  <div class="widget">
+    <img class="avatar" src="http://img3.duitang.com/uploads/item/201508/13/20150813083126_Q5TZN.thumb.224_0.jpeg">
+    <h2 class="author">youyou0123</h2>
+    <h3 class="description"></h3>
+    <div class="count-box">
+      <a href="/archives"><div><strong>6</strong><br>文章</div></a>
+      <a href="/categories"><div><strong>0</strong><br>分类</div></a>
+      <a href="/tags"><div><strong>0</strong><br>标签</div></a>
+    </div>
+
+
+
+    <div class="social-link">
+      
+        <a class="hvr-bounce-in" href="http://github.com/ShanaMaid" target="_blank" title="Github">
+          Github
+        </a>
+      
+    </div>
+
+    <div class="friend-link">
+      <h2>友情链接</h2>
+      
+        <a class="hvr-bounce-in" href="http://blog.shanamaid.top/" target="_blank" title="ShanaMaid">
+          ShanaMaid
+        </a>
+      
+    </div>
+  </div>
+</div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy;2017 - 2018 youyou0123<br>
+      由<a href="http://hexo.io/" target="_blank">Hexo</a>强力驱动 | 
+      主题-<a href="https://github.com/ShanaMaid/hexo-theme-shana">Shana</a>
+      
+    </div>
+    
+  </div>
+</footer>
+    </div>
+    
+
+<script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/wow/0.1.6/wow.min.js"></script>
+<script>
+new WOW().init();
+</script>   
+
+
+  <link rel="stylesheet" href="/plugin/fancybox/jquery.fancybox.css">
+  <script src="/plugin/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+  <link rel="stylesheet" href="/plugin/galmenu/GalMenu.css">
+  <script src="/plugin/galmenu/GalMenu.js"></script>
+  <div class="GalMenu GalDropDown">
+      <div class="circle" id="gal">
+        <div class="ring">
+          
+            <a href="/" title="" class="menuItem">首页</a>
+          
+            <a href="/tags" title="" class="menuItem">标签</a>
+          
+            <a href="/categories" title="" class="menuItem">分类</a>
+          
+            <a href="/archives" title="" class="menuItem">归档</a>
+          
+            <a href="/xxxxxxxxx" title="" class="menuItem">xxx</a>
+          
+            <a href="/xxxxxxx" title="" class="menuItem">xxxx</a>
+          
+        </div>
+        
+          <audio id="audio" src="#"></audio>
+        
+      </div> 
+</div>
+<div id="overlay" style="opacity: 1; cursor: pointer;"></div>
+  <script type="text/javascript">var items = document.querySelectorAll('.menuItem');
+    for (var i = 0,
+    l = items.length; i < l; i++) {
+      items[i].style.left = (50 - 35 * Math.cos( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%";
+      items[i].style.top = (50 + 35 * Math.sin( - 0.5 * Math.PI - 2 * (1 / l) * i * Math.PI)).toFixed(4) + "%"
+    }</script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('body').GalMenu({
+      'menu': 'GalDropDown'
+    })
+  });
+</script>
+
+  <section class="hidden-xs"> 
+  <ul class="cb-slideshow"> 
+    <li><span>苟利</span></li> 
+    <li><span>国家</span></li> 
+    <li><span>生死以</span></li> 
+    <li><span>岂能</span></li> 
+    <li><span>祸福</span></li> 
+    <li><span>趋避之</span></li> 
+  </ul>
+</section>
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
