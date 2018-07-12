@@ -38,7 +38,7 @@
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>11</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>12</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
@@ -65,6 +65,131 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-小白程度学习react的路由" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/07/12/小白程度学习react的路由/" class="article-date">
+  <time class="post-time" datetime="2018-07-12T09:26:53.732Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">12</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="小白程度学习react的路由"><a href="#小白程度学习react的路由" class="headerlink" title="小白程度学习react的路由"></a>小白程度学习react的路由</h1><p>标签（空格分隔）： 未分类</p>
+<hr>
+<p>今天来说说React的路由React-Router。它是官方维护的，事实上也是唯一可选的路由库。它通过管理URL，实现组件的切换和状态的变化，是React非常重要的组件。</p>
+<p>剑有双刃，事物都有优缺点，强大的React路由也不例外。</p>
+<p>1、优点：</p>
+<pre><code>1).良好的交互体验
+
+用户不需要重新刷新页面，获取数据也是通过Ajax异步获取，页面显示流畅。
+
+2).良好的前后端工作分离模式
+
+单页Web应用可以和RESTful规约一起使用，通过REST API提供接口数据，并使用Ajax异步获取，这样有助于分离客户端和服务器端工作。更进一步，可以在客户端也可以分解为静态页面和页面交互两个部分。
+
+3).减轻服务器压力
+
+服务器只用出数据就可以，不用管展示逻辑和页面合成，吞吐能力会提高几倍；
+
+4).共用一套后端程序代码
+不用修改后端程序代码就可以同时用于Web界面、手机、平板等多种客户端；
+</code></pre><p>2、缺点：</p>
+<pre><code>1).SEO难度较高
+
+由于所有的内容都在一个页面中动态替换显示，所以在SEO上其有着天然的弱势，所以如果你的站点对SEO很看重，且要用单页应用，那么就做些静态页面给搜索引擎用吧。
+
+2).前进、后退管理
+
+由于单页Web应用在一个页面中显示所有的内容，所以不能使用浏览器的前进后退功能，所有的页面切换需要自己建立堆栈管理，当然此问题也有解决方案，比如利用URI中的散列+iframe实现。
+
+3).初次加载耗时多
+
+为实现单页Web应用功能及显示效果，需要在加载页面的时候将JavaScript、CSS统一加载，部分页面可以在需要的时候加载。所以必须对JavaScript及CSS代码进行合并压缩处理，如果使用第三方库，建议使用一些大公司的CDN，因此带宽的消耗是必然的。
+
+
+https://reacttraining.com/react-router/
+</code></pre><p>然后来说说路由安装步骤吧。</p>
+<pre><code>    1.npm i react-router-dom -S
+    2.import { BrowserRouter as Router} from &apos;react-router-dom&apos;
+    3.ReactDOM.render(
+            &lt;Router&gt;
+                &lt;App /&gt;   在根节点下使用
+            &lt;/Router&gt;
+            ,
+            document.getElementById(&apos;root&apos;)
+        )
+
+    4.
+        &lt;Route path=&quot;/&quot; component={Index}/&gt;
+        &lt;Route path=&quot;/about&quot; component={About}/&gt;
+        &lt;Link to=&quot;/&quot;&gt;说明&lt;/Link&gt;
+
+    5.
+    exact:
+        path    location.pathname   exact   matches?
+        /one    /one/two    true    no
+        /one    /one/two    false   yes
+
+
+    strict:
+        path    location.pathname   matches?
+        /one/   /one            no
+        /one/   /one/           yes
+        /one/   /one/two        yes
+
+
+
+在Route中如果写了component={组件}，那么如果要获取URL信息
+可以去组件中的render函数中的this.props中查找
+如果在render下面，信息只有path匹配才会执行这个组件
+    render={(URL信息)=&gt;{
+        return 组件
+    }}
+
+如果在children 下面，不管匹不匹配某个路径都会执行这个组件(甚至可以不用写path)
+    children = {(URL信息)=&gt;{
+        return 组件
+    }}
+
+如果不匹配，url是没有match（值为null）
+
+URL:
+    match
+    loaction
+    history
+</code></pre><p>路由匹配：</p>
+<pre><code>精确匹配：  exact 只找这个路径,后面的路径就不认了
+            /index
+            /index/aa  后面的就用不了。
+
+模糊匹配：  strict 只认包含这个路径的，包括后面的
+            /index/
+            /index/aa
+            /index  没有后面的/就用不了。
+</code></pre><p>如果要超精确匹配，那么要加 exact strict 。</p>
+<p>先写到这里吧，不懂的建议看官网文档，感谢观看，回见。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/07/12/小白程度学习react的路由/" data-id="cjjidqzxm000b389jcq0gsbpq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-移动端的头尾固定问题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -132,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/移动端的头尾固定问题/" data-id="cjji973ry0008xg9j59zwi9rx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/移动端的头尾固定问题/" data-id="cjjidqzpm000a389jcphv7da8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +320,7 @@ console.log(&quot;key名称是：&quot;+key+&quot;,key的值是：&quot;+map[key
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjji973l00000xg9j0gdcz1ri" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjjidqzof0001389jcuo7gvp1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -363,7 +488,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjji973q10001xg9jesfd8tih" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjjidqzkz0000389jwfexn54t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,7 +538,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjji973ro0005xg9jsjtj122z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjjidqzph0008389j4dpanl1m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -465,7 +590,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjji973ri0003xg9jxbgc7eax" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjjidqzoi0002389jjlqe141u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -511,7 +636,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjji973t70009xg9jdj70uk3n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjjidqzpd0007389jz3tpm0am" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,7 +677,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/js中面向过程和面向对象/" data-id="cjji973rl0004xg9j2zba095a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/js中面向过程和面向对象/" data-id="cjjidqzok0003389jcmw3pt9e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,7 +728,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/飞流直下瀑布流/" data-id="cjji973ta000axg9j4ex2i892" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/26/飞流直下瀑布流/" data-id="cjjidqzpb0006389jax3cdthd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -648,77 +773,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/我和AJAX的纠结之旅/" data-id="cjji973rf0002xg9jpw9xolqr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-正则和它的小应用" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/22/正则和它的小应用/" class="article-date">
-  <time class="post-time" datetime="2018-05-22T12:30:30.245Z" itemprop="datePublished">
-    <span class="post-month">5月</span><br/>
-    <span class="post-day">22</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="在此处输入标题"><a href="#在此处输入标题" class="headerlink" title="在此处输入标题"></a>在此处输入标题</h1><p>标签（空格分隔）： 未分类</p>
-<h2 id="火星文–正则"><a href="#火星文–正则" class="headerlink" title="火星文–正则"></a>火星文–正则</h2><p>火星文你好，久仰大名，如今幸会，深感荣幸。<br>早已耳闻火星文，如今才算是认认真真的实际接触，感觉果然名不虚传。看的时候各种懂，写的时候也还行，然后两天之后拿来看，一脸懵，这是啥玩意儿？<br>哈哈，闲话不多说，我们来掰扯掰扯这火星文。</p>
-<p>正则，又叫正则表达式，是对字符串操作的一种逻辑公式。就是用事先定义好的一些特定字符、及这些特定字符的组合，组成一个“规则字符串”，这个“规则字符串”用来表达对字符串的一种过滤逻辑。<br>目前主要的应用场景在登录框方面。用以验证用户输入的信息是否符合规则。</p>
-<p>正则的书写格式：<br>简写格式为： /字符串/ ，两个斜杠中间只能为字符串，并且不能加引号；<br>标准写法为：new Regexp (正则  ||  字符串) 。</p>
-<p>两种方法的区别为：简写中的字母会被认为是字符串，放不了变量。</p>
-<p>这里列举一下我们经常用的一些元字符，如果有人需要完整的元字符表，可以点击链接<a href="https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1700215?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/1700215?fr=aladdin</a><br>也可以直接自己百度哦。</p>
-<pre><code>\d      一个数字
-\D      一个非数字
-\w      一个字母数字下划线
-\W      一个非字母数字下划线
-\s      一个空格
-\S      一个非空格
-^       开始
-&amp;       结尾
-（）    子项
-【】    在中括号中取其一，中括号自带或属性
-{a,b}   a代表最小，b为最大，如{0,5}  最小没有最多5个
-+  {1,}     最小一个最多不限
-?  {0,1}    最小可以没有，最多只能有一个
-*  {0,}     最小没有最多不限
-
-使用这些简单的元字符我们能做到什么呢？
-来来来，见证奇迹的时候到了！！
-
-1.QQ号验证：
-
-let str = &apos;102111234567&apos;;
-alert(/^[1-9]\d{4,11}$/.test(str)?&apos;是QQ&apos;:&apos;不是QQ&apos;);
-
-2.邮箱格式验证：
-
-   let str = &apos;x1236232@qq.com.cn&apos;;
-    alert(/^[1-9]\d{4,11}|^[A-Za-z]\w{5,17}@[0-9a-z]{2,8}(\.com|\.cn|\.net){1,2}$/.test(str)?&apos;是&apos;:&apos;不是&apos;);
-
-3.身份证验证：
-
-let str = &apos;430112196905171335&apos;;
-console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-2])((0[1-9])|([12][0-9])|(3[01]))\d{3}[\dxX]$/));
-</code></pre><p>这几个是比较常用的一些小应用，与大家共勉。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/22/正则和它的小应用/" data-id="cjji973rv0007xg9jyixlgsue" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/25/我和AJAX的纠结之旅/" data-id="cjjidqzon0004389j901xaf18" class="article-share-link">Share</a>
       
       
     </footer>
@@ -774,7 +829,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>11</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>12</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
