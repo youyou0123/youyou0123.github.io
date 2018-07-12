@@ -5,17 +5,17 @@
   
   <title>悠游小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#数组的方法汇总 标签（空格分隔）： js  数组的方法  向数组后面追加元素  push()&amp;emsp;&amp;emsp;会改变原数组，带回的返回值是数组的新长度 向数组前面插入元素  unshift()&amp;emsp;&amp;emsp;会改变原数组，带回的返回值是数组的新长度，IE6.7不支持他的返回值 删除数组的最后一项  pop()&amp;emsp;&amp;emsp;会改变原数组，写一个删除最后一项，写两个删除最后两">
+  <meta name="description" content="map循环的用法标签（空格分隔）： js 循环  写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。 //map循环类似forEach循环   const data=[1,2,3,4,5,6];   data.map(function (value,index,arr) {       console.log(value);//1,2,3,4,5,6   }">
 <meta property="og:type" content="article">
 <meta property="og:title" content="悠游小屋">
-<meta property="og:url" content="http://yoursite.com/2018/06/06/数组的方法汇总/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/06/20/map循环的用法/index.html">
 <meta property="og:site_name" content="悠游小屋">
-<meta property="og:description" content="#数组的方法汇总 标签（空格分隔）： js  数组的方法  向数组后面追加元素  push()&amp;emsp;&amp;emsp;会改变原数组，带回的返回值是数组的新长度 向数组前面插入元素  unshift()&amp;emsp;&amp;emsp;会改变原数组，带回的返回值是数组的新长度，IE6.7不支持他的返回值 删除数组的最后一项  pop()&amp;emsp;&amp;emsp;会改变原数组，写一个删除最后一项，写两个删除最后两">
+<meta property="og:description" content="map循环的用法标签（空格分隔）： js 循环  写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。 //map循环类似forEach循环   const data=[1,2,3,4,5,6];   data.map(function (value,index,arr) {       console.log(value);//1,2,3,4,5,6   }">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-06T13:47:35.690Z">
+<meta property="og:updated_time" content="2018-06-20T13:55:22.656Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="悠游小屋">
-<meta name="twitter:description" content="#数组的方法汇总 标签（空格分隔）： js  数组的方法  向数组后面追加元素  push()&amp;emsp;&amp;emsp;会改变原数组，带回的返回值是数组的新长度 向数组前面插入元素  unshift()&amp;emsp;&amp;emsp;会改变原数组，带回的返回值是数组的新长度，IE6.7不支持他的返回值 删除数组的最后一项  pop()&amp;emsp;&amp;emsp;会改变原数组，写一个删除最后一项，写两个删除最后两">
+<meta name="twitter:description" content="map循环的用法标签（空格分隔）： js 循环  写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。 //map循环类似forEach循环   const data=[1,2,3,4,5,6];   data.map(function (value,index,arr) {       console.log(value);//1,2,3,4,5,6   }">
   
     <link rel="alternate" href="/atom.xml" title="悠游小屋" type="application/atom+xml">
   
@@ -68,12 +68,12 @@
   </div>
 </div>
 
-        <section id="main"><article id="post-数组的方法汇总" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-map循环的用法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/06/06/数组的方法汇总/" class="article-date">
-  <time class="post-time" datetime="2018-06-06T13:48:22.749Z" itemprop="datePublished">
+    <a href="/2018/06/20/map循环的用法/" class="article-date">
+  <time class="post-time" datetime="2018-06-20T13:55:50.140Z" itemprop="datePublished">
     <span class="post-month">6月</span><br/>
-    <span class="post-day">06</span>
+    <span class="post-day">20</span>
   </time>
 </a>
    
@@ -83,30 +83,43 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#数组的方法汇总</p>
-<p>标签（空格分隔）： js</p>
+        <h1 id="map循环的用法"><a href="#map循环的用法" class="headerlink" title="map循环的用法"></a>map循环的用法</h1><p>标签（空格分隔）： js 循环</p>
 <hr>
-<p>数组的方法</p>
-<ol>
-<li>向数组后面追加元素  push()<br>&emsp;&emsp;会改变原数组，带回的返回值是数组的新长度</li>
-<li>向数组前面插入元素  unshift()<br>&emsp;&emsp;会改变原数组，带回的返回值是数组的新长度，IE6.7不支持他的返回值</li>
-<li>删除数组的最后一项  pop()<br>&emsp;&emsp;会改变原数组，写一个删除最后一项，写两个删除最后两项，返回值为被删除的元素</li>
-<li>删除数组的第一项    shift()<br>&emsp;&emsp;会改变原数组，写一个删除第一项，写两个删除前两项，返回值为被删除的元素<br>&emsp;&emsp; unshift( pop() )  // 将删除的最后一项插入到数组最前面，写几次执行几次<br>&emsp;&emsp;arr.push(  shift() ) // 将删除的第一项插入到数组最后面，写几次执行几次</li>
-<li>指定的位置删除 指定的个数<br>&emsp;&emsp;splice(  ) ;//返回值为被删除的元素时，只有删除的返回值<br> &emsp;&emsp;splice(startIndex[,length])  不指定删除的个数，默认删除到最后<br> &emsp;&emsp;startIndex的范围在 0- length-1之间<br> 特点是会改变原数组</li>
-<li>指定插入的位置以及替换元素<br> &emsp;&emsp;指定插入的位置：splice(startIndex,0[,插入的内容，插入的内容，插入的内容，….])<br>替换元素： splice(startIndex,length，[,替换的内容，替换的内容….]) </li>
-<li>截取指定开始位置和结束位置的值<br> &emsp;&emsp;slice(start[,end])  不包含结束位置<br> &emsp;&emsp;接收负数参数（同字符串的方法）<br> &emsp;&emsp;特点是不改变原数组</li>
-<li>通过连接符把数组转换成字符串<br> &emsp;&emsp;join(连接符)</li>
-</ol>
-<p>9.翻转数组  reverse()<br>&emsp;&emsp;翻转字符串<br>&emsp;&emsp;链式操作<br>&emsp;&emsp;var newStr = str.split(‘’).reverse().join(‘’)</p>
-<p>10.对数组进行排序<br>&emsp;&emsp;sort()<br>&emsp;&emsp;默认从小到大排序,默认是以字符串的编码来排序的，而不是按照数字大小<br>&emsp;&emsp;会改变原数组<br>&emsp;&emsp;在排序的时候，是从大到小排序，拿到数组中的两个值，<br>&emsp;&emsp;如果前一个值大于后一个值，不交换位置；如果前一个值小于后一个值，交换位置。</p>
-<p>内置对象Math<br>&emsp;&emsp;这个对象下的方法处理数值相关的，处理三角函数</p>
-<p>转成整数：Math.floor()<br>    &emsp;&emsp;1. 忽略小数点 parseInt()<br>    &emsp;&emsp;2. 向上取整 大于这个小数最近的整数 Math.ceil()<br>    &emsp;&emsp;3. 向下取整 小于这个小数最近的整数 Math.floor()<br>&emsp;&emsp;4. 四舍五入 Math.round()<br>&emsp;&emsp;转成随机数：Math.random()<br>    &emsp;&emsp;范围在 0 - 1之间 不包含1的<br>    &emsp;&emsp;0 - 0.9999999999</p>
-<p>11.遍历数组的方法<br>&emsp;&emsp;arr.forEach(function(item,index){})   item代表数组中的每一个值，<br>&emsp;&emsp;index是每个值的下标， 返回值是undefined<br>&emsp;&emsp;foreach（数据类型 标识符 in 表达式）<br>&emsp;&emsp;{<br>&emsp;&emsp;循环体2<br>&emsp;&emsp;}<br>&emsp;&emsp;arr.map(function(item,index){}) map的返回值是一个数组，<br>&emsp;&emsp;数组的个数和原数组相同，返回的数组的值，是传进去的回调函数的返回值<br> &emsp;&emsp;arr.filter(function(item,index){})<br>&emsp;&emsp; filter() 方法创建一个新数组,其包含通过所提供函数实现的测试的所有元素。<br>&emsp;&emsp;以上方法都可以遍历数组</p>
+<p>写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。</p>
+<pre><code>//map循环类似forEach循环  
+const data=[1,2,3,4,5,6];  
+data.map(function (value,index,arr) {  
+    console.log(value);//1,2,3,4,5,6  
+})  
+</code></pre><p>Map集合是键值对形式存储值的，所以遍历Map集合无非就是获取键和值，根据实际需求，进行获取键和值</p>
+<p>当请求得到的数据不是json对象，而是map对象如理方式如下：</p>
+<pre><code>[javascript] view plain copy
+    var map = result.data.map;  
+    var infoText = &quot;共有&quot;;  
+    var i = 0;  
+    for(var key in map)  {  
+        i++;  
+        if(i &lt; Object.getOwnPropertyNames(map).length){  
+            infoText +=  (map[key]+&quot;位&quot;+key+&quot;,&quot;);  
+        } else {  
+            infoText +=  (map[key]+&quot;位&quot;+key);  
+        }  
+    };  
+    infoText += &quot;荐购这本书。&quot;;  
+</code></pre><p>遍历方法 example：</p>
+<pre><code>var map = {&quot;普通学生“：“17”，&quot;研究生“：“5”，&quot;教授“：“2”，}；
 
+
+for(var key in map){
+console.log(&quot;key名称是：&quot;+key+&quot;,key的值是：&quot;+map[key]&quot;)
+}
+</code></pre><p>获取map长度：</p>
+<pre><code>Object.getOwnPropertyNames(map).length;
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjji973ro0005xg9jsjtj122z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjji973l00000xg9j0gdcz1ri" class="article-share-link">Share</a>
       
       
     </footer>
@@ -115,7 +128,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/06/18/Redux学习/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/06/24/移动端的头尾固定问题/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -125,7 +138,7 @@
     </a>
   
   
-    <a href="/2018/06/04/为什么会出现跨域以及跨域的解决方法/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/06/18/Redux学习/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title"></div>
     </a>
