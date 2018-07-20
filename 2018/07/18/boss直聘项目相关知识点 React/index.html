@@ -5,17 +5,17 @@
   
   <title>悠游小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="map循环的用法标签（空格分隔）： js 循环  写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。 //map循环类似forEach循环   const data=[1,2,3,4,5,6];   data.map(function (value,index,arr) {       console.log(value);//1,2,3,4,5,6   }">
+  <meta name="description" content="boss直聘项目相关知识点 React标签（空格分隔）： React  React手动更新为最新版本16的命令：npm install –save react@next     react-dom react 的基础语法：react的Hello world1.import React 是个库，使用react的时候必须在最上面引入，语法为 import React from ‘react’2.cla">
 <meta property="og:type" content="article">
 <meta property="og:title" content="悠游小屋">
-<meta property="og:url" content="http://yoursite.com/2018/06/20/map循环的用法/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/07/18/boss直聘项目相关知识点 React/index.html">
 <meta property="og:site_name" content="悠游小屋">
-<meta property="og:description" content="map循环的用法标签（空格分隔）： js 循环  写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。 //map循环类似forEach循环   const data=[1,2,3,4,5,6];   data.map(function (value,index,arr) {       console.log(value);//1,2,3,4,5,6   }">
+<meta property="og:description" content="boss直聘项目相关知识点 React标签（空格分隔）： React  React手动更新为最新版本16的命令：npm install –save react@next     react-dom react 的基础语法：react的Hello world1.import React 是个库，使用react的时候必须在最上面引入，语法为 import React from ‘react’2.cla">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-06-20T13:55:22.656Z">
+<meta property="og:updated_time" content="2018-07-18T14:28:17.282Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="悠游小屋">
-<meta name="twitter:description" content="map循环的用法标签（空格分隔）： js 循环  写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。 //map循环类似forEach循环   const data=[1,2,3,4,5,6];   data.map(function (value,index,arr) {       console.log(value);//1,2,3,4,5,6   }">
+<meta name="twitter:description" content="boss直聘项目相关知识点 React标签（空格分隔）： React  React手动更新为最新版本16的命令：npm install –save react@next     react-dom react 的基础语法：react的Hello world1.import React 是个库，使用react的时候必须在最上面引入，语法为 import React from ‘react’2.cla">
   
     <link rel="alternate" href="/atom.xml" title="悠游小屋" type="application/atom+xml">
   
@@ -68,12 +68,12 @@
   </div>
 </div>
 
-        <section id="main"><article id="post-map循环的用法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-boss直聘项目相关知识点 React" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/06/20/map循环的用法/" class="article-date">
-  <time class="post-time" datetime="2018-06-20T13:55:50.140Z" itemprop="datePublished">
-    <span class="post-month">6月</span><br/>
-    <span class="post-day">20</span>
+    <a href="/2018/07/18/boss直聘项目相关知识点 React/" class="article-date">
+  <time class="post-time" datetime="2018-07-18T14:29:23.109Z" itemprop="datePublished">
+    <span class="post-month">7月</span><br/>
+    <span class="post-day">18</span>
   </time>
 </a>
    
@@ -83,43 +83,25 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="map循环的用法"><a href="#map循环的用法" class="headerlink" title="map循环的用法"></a>map循环的用法</h1><p>标签（空格分隔）： js 循环</p>
+        <h1 id="boss直聘项目相关知识点-React"><a href="#boss直聘项目相关知识点-React" class="headerlink" title="boss直聘项目相关知识点 React"></a>boss直聘项目相关知识点 React</h1><p>标签（空格分隔）： React</p>
 <hr>
-<p>写东西用到了map循环，为了避免自己的健忘症发作，三两天后又会觉得陌生，就顺手总结了一下。</p>
-<pre><code>//map循环类似forEach循环  
-const data=[1,2,3,4,5,6];  
-data.map(function (value,index,arr) {  
-    console.log(value);//1,2,3,4,5,6  
-})  
-</code></pre><p>Map集合是键值对形式存储值的，所以遍历Map集合无非就是获取键和值，根据实际需求，进行获取键和值</p>
-<p>当请求得到的数据不是json对象，而是map对象如理方式如下：</p>
-<pre><code>[javascript] view plain copy
-    var map = result.data.map;  
-    var infoText = &quot;共有&quot;;  
-    var i = 0;  
-    for(var key in map)  {  
-        i++;  
-        if(i &lt; Object.getOwnPropertyNames(map).length){  
-            infoText +=  (map[key]+&quot;位&quot;+key+&quot;,&quot;);  
-        } else {  
-            infoText +=  (map[key]+&quot;位&quot;+key);  
-        }  
-    };  
-    infoText += &quot;荐购这本书。&quot;;  
-</code></pre><p>遍历方法 example：</p>
-<pre><code>var map = {&quot;普通学生“：“17”，&quot;研究生“：“5”，&quot;教授“：“2”，}；
+<p>React手动更新为最新版本16的命令：npm install –save react@next     react-dom</p>
+<p>react 的基础语法：<br>react的Hello world<br>1.import React 是个库，使用react的时候必须在最上面引入，语法为 import React from ‘react’<br>2.class语法新建组件，redurn里面可以直接用<br>3.render函数的返回值是输出JSX语法，会把JSX转成js执行<br>react的View层语法<br>1.JS里直接写html<br>2.class要写成className<br>3.变量用{ } 包裹即可</p>
+<p>react的API<br>1.一切皆组件<br>2.对组件间的通信通过属性传递<br>3.类实现组件，使用JSX语法</p>
+<p>组件之间传递数据<br>组件之间用props传递数据<br>1.使用&lt;组件 数据= “值” &gt; 的形式传递<br>2.组件里使用this.props获取值，this.props是所有属性<br>3.如果组件只有reder函数，还可以用函数的形式写组件，称为无状态组件<br>function用来显示只有return的组件，class可以显示比较复杂的组件。</p>
+<p>组件内部的state<br>组件内部通过state管理状态</p>
+<ol>
+<li>JSX本质上就是js，所以直接用 数组.map渲染列表<br>2.Constructor设置为初始状态，记得执行super（props)<br>3.start是一个不可变的对象，使用this.start获取<br>渲染的时候每个列表都要有一个key,这个key是不重复的，用来做虚拟DOM判断</li>
+</ol>
+<p>事件<br>onClick点击事件<br>1.JSX里onClick={this.函数名} 来绑定事件<br>2.this引用的问题，把一个函数传递给别人时候直接执行，在函数内部是拿不到this的，需要在构造函数里用bind来绑定this，或者在点击事件里使用箭头函数的形式<br>3.通过this.setState修改state，记得是返回新的state，而不是修改值</p>
+<p>生命周期<br>react 组件有若干钩子函数，在组件不同的状态下执行<br>1）初始化周期<br>2）组件重新渲染周期<br>3）组件卸载周期</p>
+<p>UI库<br>antd兼容web和ReactNative原生，两个地方都可以使用<br>蚂蚁金服出品的UI库<br>1) 网址：<a href="http://beta.mobile.ant.design/" target="_blank" rel="noopener">http://beta.mobile.ant.design/</a><br>2)安装命令： npm install antd-mobile@next –save<br>3)具体使用方法：<br>使用时需要先在文件中引入antd，<br>以按钮为例，格式import {Button} from ‘antd-mobile’ ，<br>再引入css文件import ‘antd-mobile/dist/antd-mobile.css’，<br>将文件中按钮标签替换为大写Button，同时为按钮标签加上 type=”primary”。<br>这样就可以显示为蓝色按钮，但是比较麻烦，所以可以安装插件，按需加载</p>
+<p>4）安装插件<br>安装按需加载插件，可以不需要重复引入css文件<br>安装命令： npm install react-app-rewired –save-dev<br>常用组件，导入后可以直接使用，有几个比较典型，其他的用到时候直接去官网查就可以<br>1）layou布局组件t<br>2）表单组件，数据展示组件，选择器等<br>3）操作组件</p>
 
-
-for(var key in map){
-console.log(&quot;key名称是：&quot;+key+&quot;,key的值是：&quot;+map[key]&quot;)
-}
-</code></pre><p>获取map长度：</p>
-<pre><code>Object.getOwnPropertyNames(map).length;
-</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjjtdxmpc0001o09jrelmm0da" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/18/boss直聘项目相关知识点 React/" data-id="cjjtdxmqg0008o09ju994ekma" class="article-share-link">Share</a>
       
       
     </footer>
@@ -128,17 +110,8 @@ console.log(&quot;key名称是：&quot;+key+&quot;,key的值是：&quot;+map[key
     
 <nav id="article-nav">
   
-    <a href="/2018/06/24/移动端的头尾固定问题/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/06/18/Redux学习/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/07/17/boss直聘APP，总结所用到的各种工具和知识点/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title"></div>
     </a>
