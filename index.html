@@ -38,7 +38,7 @@
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>16</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>17</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
@@ -66,6 +66,69 @@
 
         <section id="main">
   
+    <article id="post-面试基础类要点总结" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/03/面试基础类要点总结/" class="article-date">
+  <time class="post-time" datetime="2018-08-03T14:03:14.776Z" itemprop="datePublished">
+    <span class="post-month">8月</span><br/>
+    <span class="post-day">03</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="面试基础类要点总结"><a href="#面试基础类要点总结" class="headerlink" title="面试基础类要点总结"></a>面试基础类要点总结</h1><p>标签（空格分隔）： 面试</p>
+<hr>
+<p>最近在面试，碰了很多壁，踩了很多坑。也发现了自己很多不足之处，过去的时间已经过去，没抓住的机会已经溜走。但是明天依然会到来，依然会有新的机会和生活。做好今天吧，期待明天。</p>
+<p>总结了一些东西，拿给大家看看，也提醒自己，温故而知新。学海，真的是无涯的。</p>
+<p>一.  JS变量按照存储方式区分为哪些类型，并描述其特点</p>
+<p>（1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。<br>引用类型包括：对象，数组和函数。</p>
+<p>Var a=100<br>Var b=a<br>A=200<br>Console.log(b)   //100</p>
+<p>Var a = { age:20 }<br>Var b = a<br>b.age = 21<br>Console.log(a.age)   //21</p>
+<p>（2）引用类型包括：对象，数组和函数。</p>
+<p>Typeof  运算符<br>JS中使用typeof 能得到的哪些类型</p>
+<p>Typeof  undefined  // undefined<br>Typeof  ‘abc’  // string<br>Typeof  123  // number<br>Typeof  true  // boolean<br>Typeof  [ ]  // object<br>Typeof  { }  // object<br>Typeof  null  // objec<br>Typeof  console.log  // function</p>
+<p>前四个为值类型，后四个为引用类型.</p>
+<p>二.变量计算 - 强制类型转换</p>
+<p>1.字符串拼接<br>2.== 运算符<br>3.If 语句<br>4.逻辑运算</p>
+<p>(1) 字符串拼接：</p>
+<p>Var  a = 100 + 10   // 110<br>Var  b = 100 + ‘10’ // 10010</p>
+<p>（2）何时使用 == 何时使用 ===</p>
+<p>if（ obj.a == null ）{<br>//这里相当于是 obj.a ===  null  || obj.a  ===  undefined , 简写形式<br>// 这是jquery 源码中推荐的写法<br>}</p>
+<p>== 要慎用,因为会导致强制类型转换，===就不会出现这种情况，是什么就是什么<br>何时使用 == 何时使用 ===<br>100 == ‘100’// true<br>0 == ‘’  // true<br>Null  ==  undefined   // true</p>
+<p>(3)  if语句会执行强制类型转换</p>
+<p>Var  a = true<br>if ( a ) {<br>//会执行<br>}</p>
+<p>Var  b =  100<br>if ( b ) {<br>//将100转换为布尔值 true 程序会执行<br>}</p>
+<p>Var  c  =  ‘’<br>if ( c ) {<br>//强制类型转换为false不执行，返回undefined<br>}<br>if 中会被转换成false的是 0 ，NAN, ‘’ ，null ，false本身</p>
+<p>逻辑运算符类型转换<br>Console.log ( 10 &amp;&amp; 0 )   // 0<br>Console.log （’’|| ‘abc’） // ‘abc’<br>Console.log  ( ! Window.abc )  // true</p>
+<p>//判断一个变量会被当做 true 还是 false<br>Var a = 100<br>Console.log (!!a)</p>
+<p>JS中都有哪些内置函数 – 数据封装类对象</p>
+<p>Object<br>Array<br>Boolea<br>Number<br>String<br>Function<br>Date<br>Regexp<br>Error</p>
+<p>内置对象：math 和 json</p>
+<p>如何理解JSON？<br>Json 是一个数据格式，但同时是一个JS 对象，有两个常用的api<br>Json  stringify ({a:10, b:20})   把对象变成字符串<br>Json  parse( ‘{ “a”:10, “b”:20} ‘)  把字符串变成对象</p>
+<p>构造函数<br>如果是构造函数，首字母一定要大写，看到首字母大写，一般都是构造函数。</p>
+<p>构造函数–扩展<br>Var a = {  }  其实是 var a=new Object( ) 的语法糖<br>Var a = [  ]  其实是 var a=new Array( ) 的语法糖<br>Function Foo ( ) { … } 其实是 var Foo = new Function ( … )<br>使用instanceof 判断一个函数是否是一个变量的构造函数</p>
+<p>今天先写到这里吧，明天继续。共勉之。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/03/面试基础类要点总结/" data-id="cjke29vm6000glc9jf675fud4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-简书项目开发01" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/23/简书项目开发01/" class="article-date">
@@ -90,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/23/简书项目开发01/" data-id="cjjz2aodh000e6k9jmt4ybdeu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/23/简书项目开发01/" data-id="cjke29vjl000clc9jsqcxge8g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/18/boss直聘项目相关知识点 React/" data-id="cjjz2ao9j00046k9jb6ukd3ot" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/18/boss直聘项目相关知识点 React/" data-id="cjke29vis0001lc9jo3pm3nw6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +255,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/17/boss直聘APP，总结所用到的各种工具和知识点/" data-id="cjjz2aoaa00066k9jmhtarmzo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/17/boss直聘APP，总结所用到的各种工具和知识点/" data-id="cjke29vj70006lc9jmeu553hq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -231,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/15/什么情况下会出现undefined/" data-id="cjjz2ao9g00036k9jfohislvw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/15/什么情况下会出现undefined/" data-id="cjke29vjs000elc9jfy4fcvo9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +419,7 @@ URL:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/12/小白程度学习react的路由/" data-id="cjjz2aoad00076k9jm7qpxdjh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/12/小白程度学习react的路由/" data-id="cjke29vj40005lc9jjsxw20n7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -434,7 +497,7 @@ URL:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/移动端的头尾固定问题/" data-id="cjjz2aoaf00086k9jsaxxlkne" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/移动端的头尾固定问题/" data-id="cjke29vjd0009lc9jll9d6y7n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,7 +560,7 @@ console.log(&quot;key名称是：&quot;+key+&quot;,key的值是：&quot;+map[key
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjjz2aoa800056k9jvaz43dte" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjke29vj00003lc9jzazhpfz0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -665,7 +728,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjjz2ao7k00006k9j3hg1e00n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjke29vj20004lc9jjkjyqvok" class="article-share-link">Share</a>
       
       
     </footer>
@@ -715,59 +778,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjjz2aoai00096k9jyxgro8hk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-为什么会出现跨域以及跨域的解决方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/04/为什么会出现跨域以及跨域的解决方法/" class="article-date">
-  <time class="post-time" datetime="2018-06-04T10:18:26.573Z" itemprop="datePublished">
-    <span class="post-month">6月</span><br/>
-    <span class="post-day">04</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#为什么会出现跨域以及跨域的解决方法</p>
-<p>标签（空格分隔）： JS 跨域 jsonp</p>
-<hr>
-<p>最近遇到了一些跨域的问题，纠结良久，特意写了这篇汇总，用来总结归纳，避免再次掉坑，也希望能帮到一些正在纠结的人。</p>
-<p>##首先，什么是跨域？<br>所谓跨域：就是跨域名，跨端口，跨协议，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器施加的安全限制。</p>
-<p>所谓同源：就是同域名，同端口，同协议。<br>简单来说，就是你的协议，域名，端口甚至项目名称都一样，不同电脑都能实现同样的效果。</p>
-<p>###什么是同源策略？<br>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
-<p>浏览器的同源策略会导致跨域，这里同源策略又分为以下两种：<br>DOM同源策略：禁止对不同源页面DOM进行操作。这里主要场景是iframe跨域的情况，不同域名的iframe是限制互相访问的。<br>XmlHttpRequest同源策略：禁止使用XHR对象向不同源的服务器地址发起HTTP请求。只要协议、域名、端口有任何一个不同，都被当作是不同的域，之间的请求就是跨域操作。</p>
-<p>##其次，为什么要有跨域？</p>
-<p>跨域限制主要是为了安全考虑。</p>
-<p>AJAX同源策略主要用来防止CSRF攻击。如果没有AJAX同源策略，相当危险，我们发起的每一次HTTP请求都会带上请求地址对应的cookie，那么可以做如下攻击：<br>用户登录了自己的银行页面 <a href="http://mybank.com，http://mybank.com向用户的cookie中添加用户标识。用户浏览了恶意页面" target="_blank" rel="noopener">http://mybank.com，http://mybank.com向用户的cookie中添加用户标识。用户浏览了恶意页面</a> <a href="http://evil.com。执行了页面中的恶意AJAX请求代码。http://evil.com向http://mybank.com发起AJAXHTTP请求，请求会默认把http://mybank.com对应cookie也同时发送过去。银行页面从发送的cookie中提取用户标识，验证用户无误，response中返回请求数据。此时数据就泄露了。而且由于Ajax在后台执行，用户无法感知这一过程。DOM同源策略也一样，如果iframe之间可以跨域访问，可以这样攻击：做一个假网站，里面用iframe嵌套一个银行网站" target="_blank" rel="noopener">http://evil.com。执行了页面中的恶意AJAX请求代码。http://evil.com向http://mybank.com发起AJAXHTTP请求，请求会默认把http://mybank.com对应cookie也同时发送过去。银行页面从发送的cookie中提取用户标识，验证用户无误，response中返回请求数据。此时数据就泄露了。而且由于Ajax在后台执行，用户无法感知这一过程。DOM同源策略也一样，如果iframe之间可以跨域访问，可以这样攻击：做一个假网站，里面用iframe嵌套一个银行网站</a> <a href="http://mybank.com。把iframe宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。这时如果用户输入账号密码，我们的主网站可以跨域访问到http://mybank.com的dom节点，就可以拿到用户的输入了，那么就完成了一次攻击。" target="_blank" rel="noopener">http://mybank.com。把iframe宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。这时如果用户输入账号密码，我们的主网站可以跨域访问到http://mybank.com的dom节点，就可以拿到用户的输入了，那么就完成了一次攻击。</a><br>所以说有了跨域跨域限制之后，我们才能更安全的上网了。</p>
-<p>##最后，如何解决跨域？</p>
-<h3 id="1-jsonp实现跨域"><a href="#1-jsonp实现跨域" class="headerlink" title="1. jsonp实现跨域"></a>1. jsonp实现跨域</h3><p>jsonp实现跨域基本原理就是通过动态创建script标签,然后利用src属性进行跨域。这么说比较模糊，我们来看个例子:</p>
-<p>// 定义一个fun函数<br>function fun(fata) {<br>    console.log(data);<br>};<br>// 创建一个脚本，并且告诉后端回调函数名叫fun<br>var body = document.getElementsByTagName(‘body’)[0];<br>var script = document.gerElement(‘script’);<br>script.type = ‘text/javasctipt’;<br>script.src = ‘demo.js?callback=fun’;<br>body.appendChild(script);</p>
-<p>返回的js脚本，直接会执行。所以就执行了事先定义好的fun函数了，并且把数据传入了进来。</p>
-<p>fun({“name”: “name”})</p>
-<p>当然，这个只是一个原理演示，实际情况下，我们需要动态创建这个fun函数，并且在数据返回的时候销毁它。因为在实际使用的时候，我们用的各种ajax库，基本都包含了jsonp的封装，不过我们还是要知道一下原理，不然就不知道为什么jsonp不能发post请求了~</p>
-<p>###2. 服务器代理<br>浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所要域的资源再返回给客户端。</p>
-<p>###3. 通过高版本的XMLHttpRequest + 后端设置请求头权限<br>header(‘Access-Control-Allow-Origin:*’);<br>特点是更好用，总结一下就是优点：<br>一套ajax请求既能够ajax请求也能跨域请求；<br>缺点是:低版本用不了。</p>
-<p>###4. document.domain来跨子域<br>对于主域名相同，而子域名不同的情况，可以使用document.domain来跨域 这种方式非常适用于iframe跨域的情况，直接看例子吧 比如a页面地址为 <a href="http://a.yourhost.com" target="_blank" rel="noopener">http://a.yourhost.com</a> b页面为 <a href="http://b.yourhost.com。" target="_blank" rel="noopener">http://b.yourhost.com。</a> 这样就可以通过分别给两个页面设置 document.domain = <a href="http://yourhost.com" target="_blank" rel="noopener">http://yourhost.com</a> 来实现跨域。 之后，就可以通过 parent 或者 window[‘iframename’]等方式去拿到iframe的window对象了。使用window.name进行跨域window.name跨域同样是受到同源策略限制，父框架和子框架的src必须指向统一域名。window.name的优势在于，name的值在不同的页面(或者不同的域名)，加载后仍然存在，除非你显示的更改。并且支持的长度达到2M.</p>
-<p>###5.location.hash跨域<br>location.hash方式跨域，是子框架具有修改父框架src的hash值，通过这个属性进行传递数据，且更改hash值，页面不会刷新。但是传递的数据的字节数是有限的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjjz2aoch000b6k9jnshdqzpv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjke29vjc0008lc9jci8op5qr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -823,7 +834,7 @@ recoverDetail
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>16</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>17</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>

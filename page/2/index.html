@@ -38,7 +38,7 @@
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>16</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>17</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
@@ -65,6 +65,58 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-为什么会出现跨域以及跨域的解决方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/04/为什么会出现跨域以及跨域的解决方法/" class="article-date">
+  <time class="post-time" datetime="2018-06-04T10:18:26.573Z" itemprop="datePublished">
+    <span class="post-month">6月</span><br/>
+    <span class="post-day">04</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#为什么会出现跨域以及跨域的解决方法</p>
+<p>标签（空格分隔）： JS 跨域 jsonp</p>
+<hr>
+<p>最近遇到了一些跨域的问题，纠结良久，特意写了这篇汇总，用来总结归纳，避免再次掉坑，也希望能帮到一些正在纠结的人。</p>
+<p>##首先，什么是跨域？<br>所谓跨域：就是跨域名，跨端口，跨协议，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器施加的安全限制。</p>
+<p>所谓同源：就是同域名，同端口，同协议。<br>简单来说，就是你的协议，域名，端口甚至项目名称都一样，不同电脑都能实现同样的效果。</p>
+<p>###什么是同源策略？<br>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
+<p>浏览器的同源策略会导致跨域，这里同源策略又分为以下两种：<br>DOM同源策略：禁止对不同源页面DOM进行操作。这里主要场景是iframe跨域的情况，不同域名的iframe是限制互相访问的。<br>XmlHttpRequest同源策略：禁止使用XHR对象向不同源的服务器地址发起HTTP请求。只要协议、域名、端口有任何一个不同，都被当作是不同的域，之间的请求就是跨域操作。</p>
+<p>##其次，为什么要有跨域？</p>
+<p>跨域限制主要是为了安全考虑。</p>
+<p>AJAX同源策略主要用来防止CSRF攻击。如果没有AJAX同源策略，相当危险，我们发起的每一次HTTP请求都会带上请求地址对应的cookie，那么可以做如下攻击：<br>用户登录了自己的银行页面 <a href="http://mybank.com，http://mybank.com向用户的cookie中添加用户标识。用户浏览了恶意页面" target="_blank" rel="noopener">http://mybank.com，http://mybank.com向用户的cookie中添加用户标识。用户浏览了恶意页面</a> <a href="http://evil.com。执行了页面中的恶意AJAX请求代码。http://evil.com向http://mybank.com发起AJAXHTTP请求，请求会默认把http://mybank.com对应cookie也同时发送过去。银行页面从发送的cookie中提取用户标识，验证用户无误，response中返回请求数据。此时数据就泄露了。而且由于Ajax在后台执行，用户无法感知这一过程。DOM同源策略也一样，如果iframe之间可以跨域访问，可以这样攻击：做一个假网站，里面用iframe嵌套一个银行网站" target="_blank" rel="noopener">http://evil.com。执行了页面中的恶意AJAX请求代码。http://evil.com向http://mybank.com发起AJAXHTTP请求，请求会默认把http://mybank.com对应cookie也同时发送过去。银行页面从发送的cookie中提取用户标识，验证用户无误，response中返回请求数据。此时数据就泄露了。而且由于Ajax在后台执行，用户无法感知这一过程。DOM同源策略也一样，如果iframe之间可以跨域访问，可以这样攻击：做一个假网站，里面用iframe嵌套一个银行网站</a> <a href="http://mybank.com。把iframe宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。这时如果用户输入账号密码，我们的主网站可以跨域访问到http://mybank.com的dom节点，就可以拿到用户的输入了，那么就完成了一次攻击。" target="_blank" rel="noopener">http://mybank.com。把iframe宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。这时如果用户输入账号密码，我们的主网站可以跨域访问到http://mybank.com的dom节点，就可以拿到用户的输入了，那么就完成了一次攻击。</a><br>所以说有了跨域跨域限制之后，我们才能更安全的上网了。</p>
+<p>##最后，如何解决跨域？</p>
+<h3 id="1-jsonp实现跨域"><a href="#1-jsonp实现跨域" class="headerlink" title="1. jsonp实现跨域"></a>1. jsonp实现跨域</h3><p>jsonp实现跨域基本原理就是通过动态创建script标签,然后利用src属性进行跨域。这么说比较模糊，我们来看个例子:</p>
+<p>// 定义一个fun函数<br>function fun(fata) {<br>    console.log(data);<br>};<br>// 创建一个脚本，并且告诉后端回调函数名叫fun<br>var body = document.getElementsByTagName(‘body’)[0];<br>var script = document.gerElement(‘script’);<br>script.type = ‘text/javasctipt’;<br>script.src = ‘demo.js?callback=fun’;<br>body.appendChild(script);</p>
+<p>返回的js脚本，直接会执行。所以就执行了事先定义好的fun函数了，并且把数据传入了进来。</p>
+<p>fun({“name”: “name”})</p>
+<p>当然，这个只是一个原理演示，实际情况下，我们需要动态创建这个fun函数，并且在数据返回的时候销毁它。因为在实际使用的时候，我们用的各种ajax库，基本都包含了jsonp的封装，不过我们还是要知道一下原理，不然就不知道为什么jsonp不能发post请求了~</p>
+<p>###2. 服务器代理<br>浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所要域的资源再返回给客户端。</p>
+<p>###3. 通过高版本的XMLHttpRequest + 后端设置请求头权限<br>header(‘Access-Control-Allow-Origin:*’);<br>特点是更好用，总结一下就是优点：<br>一套ajax请求既能够ajax请求也能跨域请求；<br>缺点是:低版本用不了。</p>
+<p>###4. document.domain来跨子域<br>对于主域名相同，而子域名不同的情况，可以使用document.domain来跨域 这种方式非常适用于iframe跨域的情况，直接看例子吧 比如a页面地址为 <a href="http://a.yourhost.com" target="_blank" rel="noopener">http://a.yourhost.com</a> b页面为 <a href="http://b.yourhost.com。" target="_blank" rel="noopener">http://b.yourhost.com。</a> 这样就可以通过分别给两个页面设置 document.domain = <a href="http://yourhost.com" target="_blank" rel="noopener">http://yourhost.com</a> 来实现跨域。 之后，就可以通过 parent 或者 window[‘iframename’]等方式去拿到iframe的window对象了。使用window.name进行跨域window.name跨域同样是受到同源策略限制，父框架和子框架的src必须指向统一域名。window.name的优势在于，name的值在不同的页面(或者不同的域名)，加载后仍然存在，除非你显示的更改。并且支持的长度达到2M.</p>
+<p>###5.location.hash跨域<br>location.hash方式跨域，是子框架具有修改父框架src的hash值，通过这个属性进行传递数据，且更改hash值，页面不会刷新。但是传递的数据的字节数是有限的。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjke29vj90007lc9jgw93oeqf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-迷宫一样的this指向问题" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -100,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjjz2aocl000c6k9jy895m2nd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjke29vjj000blc9jmcv7olgn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -141,7 +193,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/js中面向过程和面向对象/" data-id="cjjz2ao9d00026k9jx339vofn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/js中面向过程和面向对象/" data-id="cjke29viw0002lc9j9q0pjthl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +244,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/飞流直下瀑布流/" data-id="cjjz2aoal000a6k9jzfexmmjo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/26/飞流直下瀑布流/" data-id="cjke29vjp000dlc9jamcmydi3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -237,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/我和AJAX的纠结之旅/" data-id="cjjz2aoco000d6k9jbf4vthfh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/25/我和AJAX的纠结之旅/" data-id="cjke29vjf000alc9j9yw4e8tt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +359,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/22/正则和它的小应用/" data-id="cjjz2aoe3000f6k9j6hwd0rss" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/22/正则和它的小应用/" data-id="cjke29vka000flc9jvllyul9o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -364,7 +416,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/18/hello-world/" data-id="cjjz2ao9700016k9jrqacwuhc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/18/hello-world/" data-id="cjke29vii0000lc9j0hs8mzqr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +472,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>16</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>17</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
