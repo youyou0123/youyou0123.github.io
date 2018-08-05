@@ -38,7 +38,7 @@
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>16</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>17</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
@@ -66,6 +66,71 @@
 
         <section id="main">
   
+    <article id="post-箭头函数和普通函数中this的区别" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/05/箭头函数和普通函数中this的区别/" class="article-date">
+  <time class="post-time" datetime="2018-08-05T10:30:27.106Z" itemprop="datePublished">
+    <span class="post-month">8月</span><br/>
+    <span class="post-day">05</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="箭头函数和普通函数中this的区别"><a href="#箭头函数和普通函数中this的区别" class="headerlink" title="箭头函数和普通函数中this的区别"></a>箭头函数和普通函数中this的区别</h1><p>标签（空格分隔）： JS ES6</p>
+<hr>
+<p>最近遇到一个面试题，被问到箭头函数和普通函数中的this区别，总结了一下拿出来跟大家分享一下。<br>首先知道一下什么是箭头函数，箭头函数就是没有function关键字，而是一个类似箭头的函数：</p>
+<p>var a = ()=&gt;{<br>  return 1;<br>}</p>
+<p>相当于</p>
+<p>function a(){<br>  return 1;<br>}</p>
+<p>那么就来看一下他们的区别</p>
+<p><strong>普通函数中的this:</strong></p>
+<p><strong>1.</strong> this总是代表它的直接调用者, 例如 obj.function ,那么function中的this就是obj;</p>
+<p><strong>2.</strong>在默认情况(非严格模式下,未使用 ‘use strict’),没找到直接调用者,则this指的是 window;</p>
+<p><strong>3.</strong>在严格模式下,没有直接调用者的函数中的this是 undefined;</p>
+<p><strong>4.</strong>使用call,apply,bind(ES5新增)绑定的,this指的是 绑定的对象。</p>
+<p><strong>箭头函数中的this:</strong></p>
+<p><strong>1.</strong>箭头函数会捕获其所在上下文的 this 值，作为自己的 this 值，自己本身并没有this值；<br><strong>2.</strong>箭头函数的this永远指向其上下文的this，任何方法都改变不了其指向，如call(), bind(), apply()。</p>
+<p><strong>1.箭头函数作为匿名函数,是不能作为构造函数的,不能使用new</strong></p>
+<p>var B = ()=&gt;{<br>  value:1;<br>}<br>var b = new B();<br>//报错提示：Uncaught TypeError: B is not a constructor</p>
+<p><strong>2.箭头函数不绑定arguments,取而代之用rest参数…解决</strong></p>
+<p>function A(a){<br>  console.log(arguments); //[object Arguments] {0: 1}<br>}</p>
+<p>var B = (b)=&gt;{<br>  console.log(arguments); //ReferenceError: arguments is not defined<br>}</p>
+<p>var C = (…c)=&gt;{ //…c即为rest参数<br>  console.log(c); //[3]<br>}<br>A(1);<br>B(2);<br>C(3);</p>
+<p><strong>3.箭头函数会捕获其所在上下文的 this 值，作为自己的 this 值</strong></p>
+<p>var obj = {<br>  a: 10,<br>  b: function(){<br>    console.log(this.a); //10<br>  },<br>  c: function() {<br>     return ()=&gt;{<br>           console.log(this.a); //10<br>     }<br>  }<br>}<br>obj.b();<br>obj.c()();</p>
+<p>箭头函数当方法使用的时候没有定义this绑定。<br>这句话是MDN里面写的，但是我觉得这条和上条其实是一条，还是捕获所在的上下文，比如下面这个例子：b是一个箭头函数，然后它的 this是指向window，这是为什么呢，因为箭头函数捕获的是obj{}这个对象的环境，然后这个环境的this指向的是window，就相当于上一条的例子：在c方法里面return的那个箭头函数捕获的是c:function(){}这个环境的this，而这个环境的this是obj，这样是不是就清晰明了了</p>
+<p>var obj = {<br>  a: 10,<br>  b: () =&gt; {<br>    console.log(this.a); //undefined<br>    console.log(this); //window<br>  },<br>  c: function() {<br>    console.log(this.a); //10<br>    console.log(this); //obj{…}<br>  }<br>}<br>obj.b();<br>obj.c();</p>
+<p>使用call()和apply()调用<br>通过 call() 或 apply() 方法调用一个函数时，只是传入了参数而已，对 this并没有什么影响</p>
+<p>var obj = {<br>  a: 10,<br>  b: function(n){<br>    var f = (v) =&gt; v + this.a;<br>    return f(n);<br>  },<br>  c: function(n) {<br>    var f = (v) =&gt; v + this.a;<br>    var m = {a:20};<br>    return f.call(m,n);<br>  }<br>}</p>
+<p>console.log(obj.b(1)); //11<br>console.log(obj.c(1)); //11</p>
+<p>箭头函数没有原型属性</p>
+<p>var a = ()=&gt;{<br>  return 1;<br>}</p>
+<p>function b(){<br>  return 2;<br>}</p>
+<p>console.log(a.prototype);//undefined<br>console.log(b.prototype);//object{…}</p>
+<p>箭头函数不能当做Generator函数,不能使用yield关键字<br>箭头函数不能换行</p>
+<p>var a = ()<br>          =&gt;1; //SyntaxError: Unexpected token =&gt;</p>
+<p>大概总结了这些，先这样吧，往后接触的更多一些，了解的就会更深入一些，到时候再继续分享吧。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/05/箭头函数和普通函数中this的区别/" data-id="cjkgpj14z00086k9jjd511a3x" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  
     <article id="post-简书项目开发01" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/07/23/简书项目开发01/" class="article-date">
@@ -90,7 +155,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/23/简书项目开发01/" data-id="cjke2vslp000d0s9jwt60mwhh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/23/简书项目开发01/" data-id="cjkgpj15r000e6k9jz3nzg04m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -135,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/18/boss直聘项目相关知识点 React/" data-id="cjke2vsky00020s9jibmj35m0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/18/boss直聘项目相关知识点 React/" data-id="cjkgpj11200016k9jphvfnzk3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -192,7 +257,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/17/boss直聘APP，总结所用到的各种工具和知识点/" data-id="cjke2vsku00010s9j4bmnjkic" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/17/boss直聘APP，总结所用到的各种工具和知识点/" data-id="cjkgpj14a00026k9jq4boi49t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -231,7 +296,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/15/什么情况下会出现undefined/" data-id="cjke2vsl900070s9j769owv1b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/15/什么情况下会出现undefined/" data-id="cjkgpj15v000f6k9j3rq4vi59" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +421,7 @@ URL:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/07/12/小白程度学习react的路由/" data-id="cjke2vslb00080s9jbc5aftwt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/07/12/小白程度学习react的路由/" data-id="cjkgpj15h000c6k9jnresh54r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -434,7 +499,7 @@ URL:
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/24/移动端的头尾固定问题/" data-id="cjke2vsln000c0s9jkbbldk0g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/24/移动端的头尾固定问题/" data-id="cjkgpj15n000d6k9jcqchd9vw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -497,7 +562,7 @@ console.log(&quot;key名称是：&quot;+key+&quot;,key的值是：&quot;+map[key
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjke2vsl500050s9jk1twra9a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/20/map循环的用法/" data-id="cjkgpj14d00036k9jwzbayoq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -665,7 +730,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjke2vskl00000s9juuxqsw9u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjkgpj10b00006k9j2le68wxv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -715,59 +780,7 @@ recoverDetail
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjke2vslf000a0s9jg0eohxgw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  
-    <article id="post-为什么会出现跨域以及跨域的解决方法" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/06/04/为什么会出现跨域以及跨域的解决方法/" class="article-date">
-  <time class="post-time" datetime="2018-06-04T10:18:26.573Z" itemprop="datePublished">
-    <span class="post-month">6月</span><br/>
-    <span class="post-day">04</span>
-  </time>
-</a>
-   
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#为什么会出现跨域以及跨域的解决方法</p>
-<p>标签（空格分隔）： JS 跨域 jsonp</p>
-<hr>
-<p>最近遇到了一些跨域的问题，纠结良久，特意写了这篇汇总，用来总结归纳，避免再次掉坑，也希望能帮到一些正在纠结的人。</p>
-<p>##首先，什么是跨域？<br>所谓跨域：就是跨域名，跨端口，跨协议，指的是浏览器不能执行其他网站的脚本。它是由浏览器的同源策略造成的，是浏览器施加的安全限制。</p>
-<p>所谓同源：就是同域名，同端口，同协议。<br>简单来说，就是你的协议，域名，端口甚至项目名称都一样，不同电脑都能实现同样的效果。</p>
-<p>###什么是同源策略？<br>同源策略（Same origin policy）是一种约定，它是浏览器最核心也最基本的安全功能，如果缺少了同源策略，则浏览器的正常功能可能都会受到影响。可以说Web是构建在同源策略基础之上的，浏览器只是针对同源策略的一种实现。</p>
-<p>浏览器的同源策略会导致跨域，这里同源策略又分为以下两种：<br>DOM同源策略：禁止对不同源页面DOM进行操作。这里主要场景是iframe跨域的情况，不同域名的iframe是限制互相访问的。<br>XmlHttpRequest同源策略：禁止使用XHR对象向不同源的服务器地址发起HTTP请求。只要协议、域名、端口有任何一个不同，都被当作是不同的域，之间的请求就是跨域操作。</p>
-<p>##其次，为什么要有跨域？</p>
-<p>跨域限制主要是为了安全考虑。</p>
-<p>AJAX同源策略主要用来防止CSRF攻击。如果没有AJAX同源策略，相当危险，我们发起的每一次HTTP请求都会带上请求地址对应的cookie，那么可以做如下攻击：<br>用户登录了自己的银行页面 <a href="http://mybank.com，http://mybank.com向用户的cookie中添加用户标识。用户浏览了恶意页面" target="_blank" rel="noopener">http://mybank.com，http://mybank.com向用户的cookie中添加用户标识。用户浏览了恶意页面</a> <a href="http://evil.com。执行了页面中的恶意AJAX请求代码。http://evil.com向http://mybank.com发起AJAXHTTP请求，请求会默认把http://mybank.com对应cookie也同时发送过去。银行页面从发送的cookie中提取用户标识，验证用户无误，response中返回请求数据。此时数据就泄露了。而且由于Ajax在后台执行，用户无法感知这一过程。DOM同源策略也一样，如果iframe之间可以跨域访问，可以这样攻击：做一个假网站，里面用iframe嵌套一个银行网站" target="_blank" rel="noopener">http://evil.com。执行了页面中的恶意AJAX请求代码。http://evil.com向http://mybank.com发起AJAXHTTP请求，请求会默认把http://mybank.com对应cookie也同时发送过去。银行页面从发送的cookie中提取用户标识，验证用户无误，response中返回请求数据。此时数据就泄露了。而且由于Ajax在后台执行，用户无法感知这一过程。DOM同源策略也一样，如果iframe之间可以跨域访问，可以这样攻击：做一个假网站，里面用iframe嵌套一个银行网站</a> <a href="http://mybank.com。把iframe宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。这时如果用户输入账号密码，我们的主网站可以跨域访问到http://mybank.com的dom节点，就可以拿到用户的输入了，那么就完成了一次攻击。" target="_blank" rel="noopener">http://mybank.com。把iframe宽高啥的调整到页面全部，这样用户进来除了域名，别的部分和银行的网站没有任何差别。这时如果用户输入账号密码，我们的主网站可以跨域访问到http://mybank.com的dom节点，就可以拿到用户的输入了，那么就完成了一次攻击。</a><br>所以说有了跨域跨域限制之后，我们才能更安全的上网了。</p>
-<p>##最后，如何解决跨域？</p>
-<h3 id="1-jsonp实现跨域"><a href="#1-jsonp实现跨域" class="headerlink" title="1. jsonp实现跨域"></a>1. jsonp实现跨域</h3><p>jsonp实现跨域基本原理就是通过动态创建script标签,然后利用src属性进行跨域。这么说比较模糊，我们来看个例子:</p>
-<p>// 定义一个fun函数<br>function fun(fata) {<br>    console.log(data);<br>};<br>// 创建一个脚本，并且告诉后端回调函数名叫fun<br>var body = document.getElementsByTagName(‘body’)[0];<br>var script = document.gerElement(‘script’);<br>script.type = ‘text/javasctipt’;<br>script.src = ‘demo.js?callback=fun’;<br>body.appendChild(script);</p>
-<p>返回的js脚本，直接会执行。所以就执行了事先定义好的fun函数了，并且把数据传入了进来。</p>
-<p>fun({“name”: “name”})</p>
-<p>当然，这个只是一个原理演示，实际情况下，我们需要动态创建这个fun函数，并且在数据返回的时候销毁它。因为在实际使用的时候，我们用的各种ajax库，基本都包含了jsonp的封装，不过我们还是要知道一下原理，不然就不知道为什么jsonp不能发post请求了~</p>
-<p>###2. 服务器代理<br>浏览器有跨域限制，但是服务器不存在跨域问题，所以可以由服务器请求所要域的资源再返回给客户端。</p>
-<p>###3. 通过高版本的XMLHttpRequest + 后端设置请求头权限<br>header(‘Access-Control-Allow-Origin:*’);<br>特点是更好用，总结一下就是优点：<br>一套ajax请求既能够ajax请求也能跨域请求；<br>缺点是:低版本用不了。</p>
-<p>###4. document.domain来跨子域<br>对于主域名相同，而子域名不同的情况，可以使用document.domain来跨域 这种方式非常适用于iframe跨域的情况，直接看例子吧 比如a页面地址为 <a href="http://a.yourhost.com" target="_blank" rel="noopener">http://a.yourhost.com</a> b页面为 <a href="http://b.yourhost.com。" target="_blank" rel="noopener">http://b.yourhost.com。</a> 这样就可以通过分别给两个页面设置 document.domain = <a href="http://yourhost.com" target="_blank" rel="noopener">http://yourhost.com</a> 来实现跨域。 之后，就可以通过 parent 或者 window[‘iframename’]等方式去拿到iframe的window对象了。使用window.name进行跨域window.name跨域同样是受到同源策略限制，父框架和子框架的src必须指向统一域名。window.name的优势在于，name的值在不同的页面(或者不同的域名)，加载后仍然存在，除非你显示的更改。并且支持的长度达到2M.</p>
-<p>###5.location.hash跨域<br>location.hash方式跨域，是子框架具有修改父框架src的hash值，通过这个属性进行传递数据，且更改hash值，页面不会刷新。但是传递的数据的字节数是有限的。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjke2vsl700060s9jtup88fsb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjkgpj14u00076k9jftjhi2qe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -823,7 +836,7 @@ recoverDetail
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>16</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>17</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
