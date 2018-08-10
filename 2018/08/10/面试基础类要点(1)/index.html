@@ -3,15 +3,19 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2018/8 | 悠游小屋</title>
+  <title>悠游小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="面试基础类要点(1)标签（空格分隔）： js 基础  一.  JS变量按照存储方式区分为哪些类型，并描述其特点 （1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。引用类型包括：对象，数组和函数。 var a=100var b=aa =200console.log(b)   //100 var a = { age:20 }var b = ab.age =">
+<meta property="og:type" content="article">
 <meta property="og:title" content="悠游小屋">
-<meta property="og:url" content="http://yoursite.com/archives/2018/08/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/08/10/面试基础类要点(1)/index.html">
 <meta property="og:site_name" content="悠游小屋">
+<meta property="og:description" content="面试基础类要点(1)标签（空格分隔）： js 基础  一.  JS变量按照存储方式区分为哪些类型，并描述其特点 （1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。引用类型包括：对象，数组和函数。 var a=100var b=aa =200console.log(b)   //100 var a = { age:20 }var b = ab.age =">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-08-10T13:24:08.884Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="悠游小屋">
+<meta name="twitter:description" content="面试基础类要点(1)标签（空格分隔）： js 基础  一.  JS变量按照存储方式区分为哪些类型，并描述其特点 （1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。引用类型包括：对象，数组和函数。 var a=100var b=aa =200console.log(b)   //100 var a = { age:20 }var b = ab.age =">
   
     <link rel="alternate" href="/atom.xml" title="悠游小屋" type="application/atom+xml">
   
@@ -64,52 +68,76 @@
   </div>
 </div>
 
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap animated rubberBand">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/10/面试基础类要点(1)/" class="archive-article-date">
+        <section id="main"><article id="post-面试基础类要点(1)" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/10/面试基础类要点(1)/" class="article-date">
   <time class="post-time" datetime="2018-08-10T13:24:35.172Z" itemprop="datePublished">
     <span class="post-month">8月</span><br/>
     <span class="post-day">10</span>
   </time>
 </a>
-      
-    </header>
+   
   </div>
-</article>
-  
+  <div class="article-inner">
     
     
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/08/05/箭头函数和普通函数中this的区别/" class="archive-article-date">
-  <time class="post-time" datetime="2018-08-05T10:30:27.106Z" itemprop="datePublished">
-    <span class="post-month">8月</span><br/>
-    <span class="post-day">05</span>
-  </time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-    </header>
+        <h1 id="面试基础类要点-1"><a href="#面试基础类要点-1" class="headerlink" title="面试基础类要点(1)"></a>面试基础类要点(1)</h1><p>标签（空格分隔）： js 基础</p>
+<hr>
+<p>一.  JS变量按照存储方式区分为哪些类型，并描述其特点</p>
+<p>（1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。<br>引用类型包括：对象，数组和函数。</p>
+<p>var a=100<br>var b=a<br>a =200<br>console.log(b)   //100</p>
+<p>var a = { age:20 }<br>var b = a<br>b.age = 21<br>console.log(a.age)   //21</p>
+<p>（2）引用类型包括：对象，数组和函数。</p>
+<p>typeof  运算符<br>JS中使用typeof 能得到的哪些类型</p>
+<p>typeof  undefined  // undefined<br>typeof  ‘abc’  // string<br>typeof  123  // number<br>typeof  true  // boolean<br>typeof  [ ]  // object<br>typeof  { }  // object<br>typeof  null  // objec<br>typeof  console.log  // function</p>
+<p>前四个为值类型，后四个为引用类型.</p>
+<p>二.变量计算 - 强制类型转换</p>
+<p>1.字符串拼接<br>2.== 运算符<br>3.If 语句<br>4.逻辑运算</p>
+<p>(1) 字符串拼接：</p>
+<p>var  a = 100 + 10   // 110<br>var  b = 100 + ‘10’ // 10010</p>
+<p>（2）何时使用 == 何时使用 ===</p>
+<p>if（ obj.a == null ）{<br>//这里相当于是 obj.a ===  null  || obj.a  ===  undefined , 简写形式<br>// 这是jquery 源码中推荐的写法<br>}</p>
+<p>== 要慎用,因为会导致强制类型转换，===就不会出现这种情况，是什么就是什么<br>何时使用 == 何时使用 ===<br>100 == ‘100’// true<br>0 == ‘’  // true<br>null  ==  undefined   // true</p>
+<p>(3)  if语句会执行强制类型转换</p>
+<p>var  a = true<br>if ( a ) {<br>//会执行<br>}</p>
+<p>var  b =  100<br>if ( b ) {<br>//将100转换为布尔值 true 程序会执行<br>}</p>
+<p>var  c  =  ‘’<br>if ( c ) {<br>//强制类型转换为false不执行，返回undefined<br>}<br>if 中会被转换成false的是 0 ，NaN, ‘’ ，null ，false本身</p>
+<p>逻辑运算符类型转换<br>console.log ( 10 &amp;&amp; 0 )   // 0<br>console.log （’’|| ‘abc’） // ‘abc’<br>console.log  ( ! Window.abc )  // true</p>
+<p>//判断一个变量会被当做 true 还是 false<br>var a = 100<br>console.log (!!a)</p>
+<p>JS中都有哪些内置函数 – 数据封装类对象</p>
+<p>Object<br>Array<br>Boolea<br>Number<br>String<br>Function<br>Date<br>Regexp<br>Error</p>
+<p>内置对象：math 和 json</p>
+<p>如何理解JSON？<br>json 是一个数据格式，但同时是一个JS 对象，有两个常用的api<br>json  stringify ({a:10, b:20})   把对象变成字符串<br>json  parse( ‘{ “a”:10, “b”:20} ‘)  把字符串变成对象</p>
+<p>构造函数<br>如果是构造函数，首字母一定要大写，看到首字母大写，一般都是构造函数。</p>
+<p>构造函数–扩展<br>var a = {  }  其实是 var a=new Object( ) 的语法糖<br>var a = [  ]  其实是 var a=new Array( ) 的语法糖<br>function Foo ( ) { … } 其实是 var Foo = new function ( … )</p>
+<p>判断一个函数是否是一个变量的构造函数  使用instanceof<br>判断一个变量是否为“数组”:   变量  instanceof  Array</p>
+<p>这只是一部分，明天继续总结。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/10/面试基础类要点(1)/" data-id="cjko0ymwd000fks9j0y14f6c7" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/05/箭头函数和普通函数中this的区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
+
 
 
 </section>
