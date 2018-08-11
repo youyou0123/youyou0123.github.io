@@ -38,7 +38,7 @@
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>18</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>19</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>
@@ -65,6 +65,174 @@
 </div>
 
         <section id="main">
+  
+    <article id="post-Redux学习" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/06/18/Redux学习/" class="article-date">
+  <time class="post-time" datetime="2018-06-18T09:08:31.523Z" itemprop="datePublished">
+    <span class="post-month">6月</span><br/>
+    <span class="post-day">18</span>
+  </time>
+</a>
+   
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#Redux学习</p>
+<p>标签（空格分隔）：js redux</p>
+<hr>
+<p>整理了一下Redux笔记，总结一下拿给大家看一看吧，肯定有很多不完善的地方，各位看客勿喷，大家一起来共同进步吧。 Redux是一个有用的架构，但不是非用不可。事实上，大多数情况，你可以不用它，只用 React 就够了。</p>
+<p>但是当用户的使用方式复杂，并且不同身份的用户有不同的使用方式（比如普通用户和管理员）以及多个用户之间可以协作的情况，同时出现了与服务器大量交互等情况，你就会需要这个Redux了。</p>
+<p>根据官网，Redux有三大原则：</p>
+<p>1.单一数据源。整个应用的state都被存储在一个名为store的object树中。这个理念是正确的，但实际应用中，也不必太教条。例如一些仅限React组件内部使用的，纯展示用的state可以不必存储到store中。以我目前对Redux的理解，我倾向于只在store里存储各组件间有交互依赖关系的state。</p>
+<p>2.Store里的state是只读的。只能通过分派Action通过Reducer来修改存在Store里的state。Action的本质是个描述已发生事件，能携带数据的plain object。作用是告知Reducer该更新Store里哪些state。</p>
+<p>3.使用纯函数来执行修改state。即在Reducer里修改state。Reducer接收两个参数：旧的state和Action，返回一个新的state。它应该是个纯函数：只要有相同的参数，就一定能得到相同的返回值。这个理念是正确的，虽然你在Reducer里做一些不纯的操作也不会报错，但不建议这么做。</p>
+<p>一、目录结构规范</p>
+<p>项目使用的是碎片化目录结构，适合大型项目。<br>componets目录存放的公共组件<br>containers目录存放项目的公共容器<br>routers目录存放不同路由下的不同模块（一级路由区分模块，每个一级路由一个模块）<br>routers/List目录下零散的文件是对应的路由文件（chunk）<br>routers/List/components目录下是List模块的公共组件<br>routers/List/containers目录下是List模块的页面组件<br>routers/List/redux目录下是List模块的跟redux相关的文件（action、reducer等）<br>routers/List/style目录下是List模块的公共样式和各个页面的样式<br>routers/List/util目录下是List模块的公共无状态组件</p>
+<p>上述是以List模块为例，其他各个模块均跟此模块类似。</p>
+<p>二、redux数据源规范</p>
+<p>通常情况下，每个页面都有自己的数据源，各个页面的数据源是平级的。<br>所以在react-router里配置的时候，当路由走到对应页面路由的时候，动态注入该数据源。</p>
+<p>import { injectReducer } from ‘../../store/reducers’</p>
+<p>export default (store) =&gt; ({<br>     path: ‘user’,<br>     getComponent (nextState, cb) {<br>            require.ensure([], (require) =&gt; {<br>                // 拿到reducer和store 动态注入节点<br>     const {infoReducer} = require(‘./redux/index’).default;<br>     injectReducer(store, { key: ‘info’, reducer: infoReducer });</p>
+<pre><code> const Info = require(&apos;./containers/info&apos;).default;
+
+ cb(null, Info);
+ })
+}
+</code></pre><p>})<br>上述代码的大致意思就是：当路由走到user页面的时候，到对应模块下的redux文件中 获取对应reducer，<br>创建一个obj，key是数据源的名称，reducer是写好的reducer，注入到全局的store中。<br>路由结构：</p>
+<p>.<br>├── list<br>│   ├── list<br>│   └── detail<br>└── user<br>    └── info<br>对应的redux的结构：</p>
+<p>{<br>    list: {},<br>    detail: {},<br>    info: {}<br>}<br>各个页面在redux中的数据源是平铺的，这样各个数据源互不干涉，不影响。<br>每个页面的数据源单独维护。</p>
+<p>之前还想过另一种方式，参考了一个vuex的多页应用设计。<br>就是一个模块一个数据源，每个数据源下对应页面数据源。<br>还是上面那个例子，这样的思想下redux数据结构就是：</p>
+<p>{<br>    list: {<br>        list: {},<br>        detail: {},<br>    },<br>    user: {<br>        info: {}<br>    }<br>}<br>根路由结构一样，这样的话，以模块为单位，页面数据源是模块下的一个属性。<br>这样路由走到模块级路由的时候，注入reducer。<br>最后放弃了这种方案，原因很多，比如：</p>
+<p>对于这种深层次的对象嵌套是不推荐的（两层级以上），这样很容易出现，改了list中的一个属性，页面没有重绘的问题。</p>
+<p>进入到一个页面，这时候每个页面的数据源已经初始化了，这样造成性能浪费和开发过程中产生一定的问题。</p>
+<p>更新了detail中的一个属性，redux判断整个list改变，从而替换，触发很多不必要的重绘。性能浪费。</p>
+<p>所以，还是应该使用节点平铺的方式。</p>
+<p>三、redux相关文件名称规范</p>
+<p>项目目录按照模块划分的，<br>redux文件都应该放到模块目录下的redux目录下。<br>该目录下包含了包含了该模块下的所有redux文件。<br>总共应该有 actionTypes actions reducers index 四个文件，<br>actionTypes 文件表示action的type，文件里都是常量；<br>actions 文件表示action和action creator；<br>reducers 文件表示模块下的所有reducer的一个集合；<br>index 文件只干一件事，import reducers 然后暴露出去，为的是遵循规范。</p>
+<p>四、action type变量名称规范<br>在redux中，所有的action type是唯一的，全局不可重复。<br>所以，按理说整个项目应该有一个actionTypes文件，存储的是全局的action type。<br>但是考虑到这样的话 actionTypes文件内容会特别多，不便于维护。<br>所以，每个模块各自创建一个actionTypes文件，通过命名来避免重名问题。</p>
+<p>写了一段时间，发现一个急于要解决的问题，就是action type的命名。<br>每个人的命名都按照自己的想法命名，不便于其他人阅读。<br>所以总结出action type的命名规则：<br>MODULE_PAGE_ACTION_OTHER<br>模块名<em>页面名</em>操作名_其他</p>
+<p>前两个名字是为了避免变量重名，<br>ACTION表示具体操作名称。<br>数据库有增删改查（CRUD）<br>但是redux的store基本不会存在增删查的情况，所以对改（U）做了细分：</p>
+<p>INIT 页面第一次进入获取数据的时候（这种情况通常会对很多数据进行填充，比较复杂，单独算作一种）</p>
+<p>UPDATE 更新某些数据</p>
+<p>RECOVER 某些页面卸载的时候 需要还原成初始化的数据</p>
+<p>例如：</p>
+<p>// 更新化列表数据<br>export const LIST_LIST_UPDATE_LIST = ‘LIST_LIST_UPDATE_LIST’;<br>// 初始化详情页数据<br>export const LIST_DETAIL_INIT = ‘LIST_DETAIL_INIT’;<br>// 还原详情页数据<br>export const LIST_DETAIL_RECOVER = ‘LIST_DETAIL_RECOVER’;<br>五、action/action creator书写顺序，export顺序规范<br>actions里面是整个模块的action和action creator。<br>这里面有很多情况，<br>比如里面有正常的 action：</p>
+<p>const updateList = (data) =&gt; ({<br>    type: actionType.LIST_LIST_UPDATE_LIST,<br>    payload: data<br>});<br>还有发请求，请求数据的：</p>
+<p>function fetchList() {<br>     return (dispatch, getState) =&gt; {<br>     // 这里使用axios发送请求<br>     // 此处可以通过getState()获取到整个store的数据<br>     // 发送请求前处理数据</p>
+<pre><code>// return axios.get(&apos;/ajax/xxxxxxx&apos;)
+// .then(response =&gt; response.data)
+// .catch(response =&gt; response.data)
+
+// 模拟接口
+return new Promise(()=&gt;{
+    const array = [
+        {id: &apos;a1&apos;, title: &apos;this is title&apos;, content: &apos;this is content&apos;},
+        {id: &apos;b2&apos;, title: &apos;this is b2 title&apos;, content: &apos;this is content, 文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容&apos;},
+        {id: &apos;c3&apos;, title: &apos;this is c3 title&apos;, content: &apos;this is 文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容&apos;},
+        {id: &apos;d4&apos;, title: &apos;this is title d4&apos;, content: &apos;this is 文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容&apos;},
+        {id: &apos;e5&apos;, title: &apos;this is e5 title&apos;, content: &apos;this is content 文章内容文章内容文章内容文章内容文章内容文章内容文章内容文章内容&apos;}
+    ];
+
+    dispatch(updateList(array));
+
+    return array;
+});
+</code></pre><p>}<br>所以需要区分</p>
+<p>所以发送请求的都以fetch开头，名字与接口一致；</p>
+<p>action与命名规则将actionApplyOther，比如initDetail,updateList等；</p>
+<p>action文件暴露出去的时候，按照一定顺序排列；</p>
+<p>export default {<br>    fetchList,<br>    getDetailById,</p>
+<pre><code>initDetail,
+
+updateDetailStatus,
+
+recoverDetail
+</code></pre><p>};<br>六、reducer书写规范<br>reducers文件包含该模块下的所有页面的reducer，<br>文件里可能有一些公用方法，写在最前面。<br>每个页面会有一个初始化页面的state和reducer。</p>
+<p>detailState = {};</p>
+<p>function detailReducer (state ={…detilState}, action) {<br>    switch (action.type) {<br>        case actionTypes.LIST_DETAIL_INIT: {<br>            const { title, content } = action.payload;</p>
+<pre><code>        state.title = title;
+        state.content = content;
+
+        return { ...state };
+    }
+    case actionTypes.LIST_DETAIL_RECOVER: {
+        state = detailState;
+
+        return { ...state };
+    }
+    default:
+        return state;
+}
+</code></pre><p>};<br>七、模块无状态组件规范<br>每个模块都会有些可重用的html代码段，这些代码段里通常还有变量，<br>将这些变量提取出来，做成公共的无状态组件，提高代码复用率。<br>util目录下的文件就是模块下的无状态组件的集合。<br>这里无状态组件的命名规范：<br>get + 模块名 + 具体片段 + DOM</p>
+<p>import React from ‘react’<br>import { Link } from ‘react-router’</p>
+<p>export function getListListDOM({ list }) {<br>    const result = [];<br>    list.map((item) =&gt; {<br>        result.push(<br>            <li key="{item.id}"><br>                &lt;Link to={<code>/list/detail/${item.id}</code>}&gt;{item.title}<br>            </li><br>        );<br>    });</p>
+<pre><code>return result;
+</code></pre><p>}<br>页面使用的时候：</p>
+<p>import React from ‘react’<br>import { connect } from ‘react-redux’<br>import { bindActionCreators } from ‘redux’<br>import actions from ‘../redux/actions’<br>import { getListListDOM } from ‘../util/‘<br>import ‘../style/index.scss’<br>import ‘../style/list.scss’</p>
+<p>class List extends React.Component {<br>    constructor (props) {<br>        super(props);<br>        this.state = {};<br>    }<br>    componentDidMount () {<br>        this.props.dispatch(actions.fetchList())<br>            .then((result) =&gt; {<br>                // 在业务层里进行报错提示等业务操作<br>                if (result) {<br>                    console.log(‘获取数据成功’);<br>                }<br>            });<br>    }<br>    render () {<br>        const listDOM = getListListDOM(this.props.list);</p>
+<pre><code>    return (
+        &lt;div&gt;
+            &lt;ul&gt;
+                {listDOM}
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    );
+}
+</code></pre><p>}</p>
+<p>const mapStateToProps = state =&gt; ({<br>    list: state.list,<br>});</p>
+<p>export default connect(mapStateToProps, dispatch =&gt; ({ …bindActionCreators(actions, dispatch), dispatch }))(List)<br>八、数据和业务分离规范<br>引入redux就是帮我们管理数据的，所以在redux的相关文件里面不要做view层能做的事。<br>比如: 操作成功提示 报错提示 等等。<br>数据层里action creator 发送请求，action creator中负责简单的数据发送前处理，返回数据的简单处理，涉及到更改store都交给reducer，<br>然后将请求返回结果return给view层 view层再做相关操作 。<br>例子可以见详细的demo。</p>
+<p>九、公共组件使用redux规范<br>公共组件面临着在多个页面使用的场景，需要的参数虽然相同，但是可能来自不同的数据节点，<br>这样绑定数据节点的话不好区分，所以公共组件尽量使用父子组件参数传递。<br>如果该组件实在需要redux数据节点，为其建立单独的redux节点，和单独的reducer 。</p>
+<p>十、搭配 eslint-react 使用<br>项目中，为了规范大家的代码，使用到了eslint，并且引入了针对react规范的包。<br>该包分别针对react使用和jsx使用设定了规范，<br>我们阅读了所有规范，选出了适合我们的配置方案：</p>
+<p>{<br>    “rules”: {<br>    “comma-dangle”: 0,<br>    “no-console”: 0,</p>
+<pre><code>&quot;react/default-props-match-prop-types&quot;: 2, // 有默认值的属性必须在propTypes中指定
+&quot;react/no-array-index-key&quot;: 2, // 遍历出来的节点必须加key
+&quot;react/no-children-prop&quot;: 2, // 禁止使用children作为prop
+&quot;react/no-direct-mutation-state&quot;: 2, // 禁止直接this.state = 方式修改state 必须使用setState
+&quot;react/no-multi-comp&quot;: 2, // 一个文件只能存在一个组件
+&quot;react/no-set-state&quot;: 2, // 不必要的组件改写成无状态组件
+&quot;react/no-string-refs&quot;: 2, // 禁止字符串的ref
+&quot;react/no-unescaped-entities&quot;: 2, // 禁止&apos;&lt;&apos;, &apos;&gt;&apos;等单标签
+&quot;react/no-unknown-property&quot;: 2, // 禁止未知的DOM属性
+&quot;react/no-unused-prop-types&quot;: 2, // 禁止未使用的prop参数
+&quot;react/prefer-es6-class&quot;: 2, // 强制使用es6 extend方法创建组件
+&quot;react/require-default-props&quot;: 2, // 非require的propTypes必须制定默认值
+&quot;react/self-closing-comp&quot;: 2, // 没有children的组件和html必须使用自闭和标签
+&quot;react/sort-comp&quot;: 2, // 对组件的方法排序
+&quot;react/sort-prop-types&quot;: 2, // 对prop排序
+&quot;react/style-prop-object&quot;: 2, // 组件参数如果是style，value必须是object
+
+&quot;react/jsx-boolean-value&quot;: 2, // 属性值为true的时候，省略值只写属性名
+&quot;react/jsx-closing-bracket-location&quot;: 2, // 强制闭合标签的位置
+&quot;react/jsx-closing-tag-location&quot;: 2, // 强制开始标签闭合标签位置
+&quot;react/jsx-equals-spacing&quot;: 2, // 属性赋值不允许有空格
+&quot;react/jsx-first-prop-new-line&quot;: 2, // 只有一个属性情况下单行
+&quot;react/jsx-key&quot;: 2, // 强制遍历出来的jsx加key
+&quot;react/jsx-max-props-per-line&quot;: [2, { &quot;maximum&quot;: 2 }], // 每行最多几个属性
+&quot;react/jsx-no-comment-textnodes&quot;: 2, // 检查jsx注释
+&quot;react/jsx-no-duplicate-props&quot;: 2, // 检查属性名重名
+&quot;react/jsx-no-target-blank&quot;: 2, // 检查jsx是否被引入和使用
+&quot;react/jsx-no-undef&quot;: 2, // 检查jsx引用规范
+&quot;react/jsx-pascal-case&quot;: 2, // 检查jsx标签名规范
+</code></pre><p>  }<br>}<br>总结<br>其实redux引入相当于是前端引入了一个数据库，全局可以使用，但是不可持久化。<br>同时也引入分层概念，与后端框架操作数据库类似，<br>不过redux于数据库还是有本质区别的：后端是存取数据关系，前端是数据和组件相互订阅关系。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/06/18/Redux学习/" data-id="cjkphnrjg0005v49jmgia0wto" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   
     <article id="post-数组的方法汇总" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -104,7 +272,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjkp4f4d2000aow9jo3loon10" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/06/数组的方法汇总/" data-id="cjkphnrk40009v49jnu5tlunh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -156,7 +324,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjkp4f4cs0006ow9j1oxl9l5f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/06/04/为什么会出现跨域以及跨域的解决方法/" data-id="cjkphnrjz0008v49j8d3uqa9c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -202,7 +370,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjkp4f4dc000fow9jc4uvfdxv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/31/迷宫一样的this指向问题/" data-id="cjkphnrlo000dv49jkegkjrht" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +411,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/29/js中面向过程和面向对象/" data-id="cjkp4f4cs0005ow9jfuz1vplb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/29/js中面向过程和面向对象/" data-id="cjkphnrih0001v49jllk2idvg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -294,7 +462,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/26/飞流直下瀑布流/" data-id="cjkp4f4dc000how9jmjqdryjv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/26/飞流直下瀑布流/" data-id="cjkphnrlx000fv49jkpu41ejo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/25/我和AJAX的纠结之旅/" data-id="cjkp4f4d20009ow9jsqsinws6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/25/我和AJAX的纠结之旅/" data-id="cjkphnrlb000bv49jvsvcp9tw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -409,7 +577,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/22/正则和它的小应用/" data-id="cjkp4f4d2000bow9j36i0s6lw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/22/正则和它的小应用/" data-id="cjkphnrn5000iv49jk472mbe1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -466,7 +634,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/18/hello-world/" data-id="cjkp4f4cs0003ow9jy8ts6sgq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/05/18/hello-world/" data-id="cjkphnriv0002v49jmkce24s2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -522,7 +690,7 @@ console.log(str.match(/^[1-9]\d{5}(1[89][0-9][0-9]|2[0-3][0-9][0-9])(0[1-9]|1[0-
     <h2 class="author">youyou0123</h2>
     <h3 class="description"></h3>
     <div class="count-box">
-      <a href="/archives"><div><strong>18</strong><br>文章</div></a>
+      <a href="/archives"><div><strong>19</strong><br>文章</div></a>
       <a href="/categories"><div><strong>0</strong><br>分类</div></a>
       <a href="/tags"><div><strong>0</strong><br>标签</div></a>
     </div>

@@ -5,17 +5,17 @@
   
   <title>悠游小屋</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="面试基础类要点(1)标签（空格分隔）： js 基础  一.  JS变量按照存储方式区分为哪些类型，并描述其特点 （1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。引用类型包括：对象，数组和函数。 var a=100var b=aa =200console.log(b)   //100 var a = { age:20 }var b = ab.age =">
+  <meta name="description" content="什么是闭包呢？这就是闭包了标签（空格分隔）： JS 闭包 基础  闭包是JS中很重要的一部分，但是究竟什么是闭包，总是让刚开始学习的人感觉云里雾里，今天特地总结了一下，拿给大家看一下。首先来看一段代码吧：123456789101112// 闭包        function F1()&amp;#123;            var a = 100;            // 返回一个函数（函数作为返">
 <meta property="og:type" content="article">
 <meta property="og:title" content="悠游小屋">
-<meta property="og:url" content="http://yoursite.com/2018/08/10/面试基础类要点(1)/index.html">
+<meta property="og:url" content="http://yoursite.com/2018/08/11/什么是闭包呢？这就是闭包了/index.html">
 <meta property="og:site_name" content="悠游小屋">
-<meta property="og:description" content="面试基础类要点(1)标签（空格分隔）： js 基础  一.  JS变量按照存储方式区分为哪些类型，并描述其特点 （1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。引用类型包括：对象，数组和函数。 var a=100var b=aa =200console.log(b)   //100 var a = { age:20 }var b = ab.age =">
+<meta property="og:description" content="什么是闭包呢？这就是闭包了标签（空格分隔）： JS 闭包 基础  闭包是JS中很重要的一部分，但是究竟什么是闭包，总是让刚开始学习的人感觉云里雾里，今天特地总结了一下，拿给大家看一下。首先来看一段代码吧：123456789101112// 闭包        function F1()&amp;#123;            var a = 100;            // 返回一个函数（函数作为返">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-10T13:24:08.884Z">
+<meta property="og:updated_time" content="2018-08-11T13:59:48.484Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="悠游小屋">
-<meta name="twitter:description" content="面试基础类要点(1)标签（空格分隔）： js 基础  一.  JS变量按照存储方式区分为哪些类型，并描述其特点 （1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。引用类型包括：对象，数组和函数。 var a=100var b=aa =200console.log(b)   //100 var a = { age:20 }var b = ab.age =">
+<meta name="twitter:description" content="什么是闭包呢？这就是闭包了标签（空格分隔）： JS 闭包 基础  闭包是JS中很重要的一部分，但是究竟什么是闭包，总是让刚开始学习的人感觉云里雾里，今天特地总结了一下，拿给大家看一下。首先来看一段代码吧：123456789101112// 闭包        function F1()&amp;#123;            var a = 100;            // 返回一个函数（函数作为返">
   
     <link rel="alternate" href="/atom.xml" title="悠游小屋" type="application/atom+xml">
   
@@ -68,12 +68,12 @@
   </div>
 </div>
 
-        <section id="main"><article id="post-面试基础类要点(1)" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-什么是闭包呢？这就是闭包了" class="wow slideInRight article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/08/10/面试基础类要点(1)/" class="article-date">
-  <time class="post-time" datetime="2018-08-10T13:24:35.172Z" itemprop="datePublished">
+    <a href="/2018/08/11/什么是闭包呢？这就是闭包了/" class="article-date">
+  <time class="post-time" datetime="2018-08-11T14:00:28.388Z" itemprop="datePublished">
     <span class="post-month">8月</span><br/>
-    <span class="post-day">10</span>
+    <span class="post-day">11</span>
   </time>
 </a>
    
@@ -83,42 +83,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="面试基础类要点-1"><a href="#面试基础类要点-1" class="headerlink" title="面试基础类要点(1)"></a>面试基础类要点(1)</h1><p>标签（空格分隔）： js 基础</p>
+        <h1 id="什么是闭包呢？这就是闭包了"><a href="#什么是闭包呢？这就是闭包了" class="headerlink" title="什么是闭包呢？这就是闭包了"></a>什么是闭包呢？这就是闭包了</h1><p>标签（空格分隔）： JS 闭包 基础</p>
 <hr>
-<p>一.  JS变量按照存储方式区分为哪些类型，并描述其特点</p>
-<p>（1）值类型，每个变量都会存储相应的值，不会互相影响，字符串类型和数字类型，布尔类型都是如此。<br>引用类型包括：对象，数组和函数。</p>
-<p>var a=100<br>var b=a<br>a =200<br>console.log(b)   //100</p>
-<p>var a = { age:20 }<br>var b = a<br>b.age = 21<br>console.log(a.age)   //21</p>
-<p>（2）引用类型包括：对象，数组和函数。</p>
-<p>typeof  运算符<br>JS中使用typeof 能得到的哪些类型</p>
-<p>typeof  undefined  // undefined<br>typeof  ‘abc’  // string<br>typeof  123  // number<br>typeof  true  // boolean<br>typeof  [ ]  // object<br>typeof  { }  // object<br>typeof  null  // objec<br>typeof  console.log  // function</p>
-<p>前四个为值类型，后四个为引用类型.</p>
-<p>二.变量计算 - 强制类型转换</p>
-<p>1.字符串拼接<br>2.== 运算符<br>3.If 语句<br>4.逻辑运算</p>
-<p>(1) 字符串拼接：</p>
-<p>var  a = 100 + 10   // 110<br>var  b = 100 + ‘10’ // 10010</p>
-<p>（2）何时使用 == 何时使用 ===</p>
-<p>if（ obj.a == null ）{<br>//这里相当于是 obj.a ===  null  || obj.a  ===  undefined , 简写形式<br>// 这是jquery 源码中推荐的写法<br>}</p>
-<p>== 要慎用,因为会导致强制类型转换，===就不会出现这种情况，是什么就是什么<br>何时使用 == 何时使用 ===<br>100 == ‘100’// true<br>0 == ‘’  // true<br>null  ==  undefined   // true</p>
-<p>(3)  if语句会执行强制类型转换</p>
-<p>var  a = true<br>if ( a ) {<br>//会执行<br>}</p>
-<p>var  b =  100<br>if ( b ) {<br>//将100转换为布尔值 true 程序会执行<br>}</p>
-<p>var  c  =  ‘’<br>if ( c ) {<br>//强制类型转换为false不执行，返回undefined<br>}<br>if 中会被转换成false的是 0 ，NaN, ‘’ ，null ，false本身</p>
-<p>逻辑运算符类型转换<br>console.log ( 10 &amp;&amp; 0 )   // 0<br>console.log （’’|| ‘abc’） // ‘abc’<br>console.log  ( ! Window.abc )  // true</p>
-<p>//判断一个变量会被当做 true 还是 false<br>var a = 100<br>console.log (!!a)</p>
-<p>JS中都有哪些内置函数 – 数据封装类对象</p>
-<p>Object<br>Array<br>Boolea<br>Number<br>String<br>Function<br>Date<br>Regexp<br>Error</p>
-<p>内置对象：math 和 json</p>
-<p>如何理解JSON？<br>json 是一个数据格式，但同时是一个JS 对象，有两个常用的api<br>json  stringify ({a:10, b:20})   把对象变成字符串<br>json  parse( ‘{ “a”:10, “b”:20} ‘)  把字符串变成对象</p>
-<p>构造函数<br>如果是构造函数，首字母一定要大写，看到首字母大写，一般都是构造函数。</p>
-<p>构造函数–扩展<br>var a = {  }  其实是 var a=new Object( ) 的语法糖<br>var a = [  ]  其实是 var a=new Array( ) 的语法糖<br>function Foo ( ) { … } 其实是 var Foo = new function ( … )</p>
-<p>判断一个函数是否是一个变量的构造函数  使用instanceof<br>判断一个变量是否为“数组”:   变量  instanceof  Array</p>
-<p>这只是一部分，明天继续总结。</p>
+<p>闭包是JS中很重要的一部分，但是究竟什么是闭包，总是让刚开始学习的人感觉云里雾里，今天特地总结了一下，拿给大家看一下。<br>首先来看一段代码吧：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 闭包</span><br><span class="line">        function F1()&#123;</span><br><span class="line">            var a = 100;</span><br><span class="line">            // 返回一个函数（函数作为返回值）</span><br><span class="line">            return function()&#123;</span><br><span class="line">                console.log(a)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        // f1 得到一个函数</span><br><span class="line">        var f1 = F1();</span><br><span class="line">        var a = 200;</span><br><span class="line">        f1();//  a=100  一个函数的父级作用域是他定义时候的作用域，而不是执行时候的作用域</span><br></pre></td></tr></table></figure></p>
+<p>什么是闭包呢？这就是闭包了。</p>
+<p>闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取[局部变量]，所以闭包可以理解成“定义在一个[函数]内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁。</p>
+<p>如果这样还是理解不了，那就把这段简单的代码多敲几遍。书读百遍其义自见嘛。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/10/面试基础类要点(1)/" data-id="cjkphnrm2000gv49jxozhxhau" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/11/什么是闭包呢？这就是闭包了/" data-id="cjkphnrjn0006v49jsrbg24qq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -127,17 +102,8 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/08/11/什么是闭包呢？这就是闭包了/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          (no title)
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/08/05/箭头函数和普通函数中this的区别/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/08/10/面试基础类要点(1)/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title"></div>
     </a>
